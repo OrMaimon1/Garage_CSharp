@@ -9,25 +9,20 @@ namespace A22_Ex03_01
     {
         private string m_VehicleModel;
         private string m_LicenseNumber;
-        private float m_EnergyPercentage;
-        private string m_OwnerName; //need to check with david
-        private string m_PhoneNumber; //need to check with david
+        private float m_EnergySourceLeft;
         private eVehicleState m_VehicleState; //need to check with david
         private List<Wheel> m_Wheels; //need to check with david
         private Engine m_Engine; //need to check with david
 
-        public Vehicle(string i_VehicleModel, string i_LicenseNumber, float i_EnergyPercentage, string i_OwnerName, 
+        public Vehicle(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft, string i_OwnerName, 
                        string i_PhoneNumber, eVehicleState i_VehicleState, List<Wheel> i_Wheels, Engine i_Engine)
         {
             m_VehicleModel = i_VehicleModel;
             m_LicenseNumber = i_LicenseNumber;
-            m_EnergyPercentage = i_EnergyPercentage;
-            m_OwnerName = i_OwnerName;
-            m_PhoneNumber = i_PhoneNumber;
+            m_EnergySourceLeft = i_EnergySourceLeft;
             m_VehicleState = i_VehicleState;
             m_Wheels = new List<Wheel>(); //need to check
-            m_Engine = new Engine(); //need to check
-
+            //m_Engine = new Engine(); //need to check
         }
 
         public string VehicleModel
@@ -43,34 +38,15 @@ namespace A22_Ex03_01
             set
             { m_LicenseNumber = value; }
         }
-        public float EnergyPercentage {
-            get
-            { 
-                return m_EnergyPercentage;
-            }
-            set
-            { 
-                m_EnergyPercentage = value;
-            }
-        }
-        public string OwnerName {
-            get
-            { 
-                return m_OwnerName;
-            }
-            set
-            { 
-                m_OwnerName = value;
-            }
-        }
-        public string PhoneNumber {
+        public float EnergySourceLeft
+        {
             get
             {
-                return m_PhoneNumber;
+                return Engine.EnergySourceLeft;
             }
             set
             {
-                m_PhoneNumber = value;
+                m_EnergySourceLeft = value;
             }
         }
         public eVehicleState VehicleState {
@@ -95,6 +71,14 @@ namespace A22_Ex03_01
             get
             {
                 return Wheels; //need to check the set
+            }
+        }
+
+        public void InflateWheels(int i_AirAmountToAdd)
+        {
+            foreach (Wheel wheel in Wheels)
+            {
+                wheel.inflate(i_AirAmountToAdd);
             }
         }
     }

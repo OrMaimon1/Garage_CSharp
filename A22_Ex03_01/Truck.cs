@@ -7,27 +7,28 @@ namespace A22_Ex03_01
 {
     public class Truck : Vehicle
     {
-        private bool m_IsThereContent;
+        private bool m_HasCargo;
         private float m_CargoCapacity;
 
-        public Truck(string i_VehicleModel, string i_LicenseNumber, float i_EnergyPercentage, string i_OwnerName, string i_PhoneNumber,
-                     eVehicleState i_VehicleState, List<Wheel> i_Wheels, Engine i_Engine, bool i_IsThereContent, float i_CargoCapacity) 
-            : base(i_VehicleModel, i_LicenseNumber, i_EnergyPercentage, i_OwnerName, i_PhoneNumber, i_VehicleState, i_Wheels, i_Engine)
+        public Truck(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft, string i_OwnerName, string i_PhoneNumber,
+                     eVehicleState i_VehicleState, List<Wheel> i_Wheels, Engine i_Engine, bool i_HasCargo, float i_CargoCapacity)
+            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_OwnerName, i_PhoneNumber, i_VehicleState, i_Wheels, i_Engine)
+            
         {
-            m_IsThereContent = i_IsThereContent;
+            m_HasCargo = i_HasCargo;
             m_CargoCapacity = i_CargoCapacity;
         }
 
-        public bool IsThereContent
+        public bool HasCargo
         {
             get
             {
-                return m_IsThereContent;
+                return m_HasCargo;
 
             }
             set
             {
-                m_IsThereContent = value;
+                m_HasCargo = value;
             }
         }
 
