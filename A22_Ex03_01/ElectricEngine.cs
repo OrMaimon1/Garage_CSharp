@@ -13,7 +13,7 @@ namespace A22_Ex03_01
             
         }
 
-        public void Recharge(float i_AmountToAdd)
+        public void ReCharge(float i_AmountToAdd)
         {
             if(EnergySourceLeft + i_AmountToAdd <= MaxEnergySource && i_AmountToAdd > 0)
             {

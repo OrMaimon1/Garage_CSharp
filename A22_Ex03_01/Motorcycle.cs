@@ -15,9 +15,10 @@ namespace A22_Ex03_01
                           List<Wheel> i_Wheels, Engine i_Engine, int i_EngineVolume, eLicenseType i_LicenseType)
             : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, i_Engine)
         {
-            //Wheels = new List<Wheel>(2);
-            Wheels.Add(null);// need to check
-            // Wheels.Add(,) //need to check how to add number of wheels
+            for(int i = 0; i < 1; i++)
+            {
+                Wheels.Add(new Wheel("MotorWheel" , 30, 30));
+            }
         }
 
         public int EngineVolume {

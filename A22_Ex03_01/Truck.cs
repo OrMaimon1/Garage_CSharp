@@ -16,6 +16,10 @@ namespace A22_Ex03_01
         {
             m_HasCargo = i_HasCargo;
             m_CargoCapacity = i_CargoCapacity;
+            for(int i = 0; i < 15; i++)
+            {
+                Wheels.Add(new Wheel("TruckWheel" , 25 , 25));
+            }
         }
         public bool HasCargo
         {

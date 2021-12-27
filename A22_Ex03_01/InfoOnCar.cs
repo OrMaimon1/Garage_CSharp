@@ -5,13 +5,13 @@ using System.Text;
 
 namespace A22_Ex03_01
 {
-    public class Customer
+    public class InfoOnCar
     {
         private string m_OwnerName; //need to check with david
         private string m_PhoneNumber; //need to check with david
         private eVehicleState m_VehicleState; //need to check with david
 
-        public Customer(string i_Ownername, string i_PhoneNumber , eVehicleState i_VehicleState)
+        public InfoOnCar(string i_Ownername, string i_PhoneNumber , eVehicleState i_VehicleState)
         {
             m_OwnerName = i_Ownername;
             m_PhoneNumber = i_PhoneNumber;

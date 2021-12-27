@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 
 namespace A22_Ex03_01
@@ -27,7 +28,7 @@ namespace A22_Ex03_01
             if(VehiclesInGarage.ContainsKey(i_license))
             {
                 VehiclesInGarage.TryGetValue(i_license, out i_Vehicle);
-                i_Vehicle.VehicleState = eVehicleState.Fixing;
+                i_Vehicle.InfoOnCar.VehicleState = eVehicleState.Fixing;
                 //Turn the state of vehicle to "In Repair"
             }
             else
@@ -43,8 +44,47 @@ namespace A22_Ex03_01
             {
                 listOfLicenses.Add(vehicle.Value.LicenseNumber);
             }
-
             return listOfLicenses;
+        }
+
+        public void ChangeVehicleState(string i_License , eVehicleState i_NewState)
+        {
+            Vehicle vehicle;
+            VehiclesInGarage.TryGetValue(i_License, out vehicle);
+            vehicle.InfoOnCar.VehicleState = i_NewState;
+        }
+
+        public void InflateWheelsToMaximumPressure(string i_License)
+        {
+            Vehicle vehicle;
+            float currentPressure;
+            float maxPressure;
+            VehiclesInGarage.TryGetValue(i_License, out vehicle);
+            foreach(Wheel wheel in vehicle.Wheels)
+            {
+                currentPressure = wheel.CurrentAirPressure;
+                maxPressure = wheel.MaxAirPressure;
+                wheel.Inflate(maxPressure - currentPressure);
+            }
+        }
+        public void FuelCar(string i_License, eFuelType i_FuelType, float i_AmountToFuel)
+        {
+            Vehicle vehicle;
+            VehiclesInGarage.TryGetValue(i_License, out vehicle);
+            (vehicle.Engine as FuelEngine).ReFuel(i_AmountToFuel , i_FuelType);
+        }
+        public void ChargeCar(string i_License, float i_MinutesToCharge)
+        {
+            Vehicle vehicle;
+            VehiclesInGarage.TryGetValue(i_License, out vehicle);
+            (vehicle.Engine as ElectricEngine).ReCharge(i_MinutesToCharge);
+        }
+
+        public Vehicle GetVehicle(string i_License)
+        {
+            Vehicle vehicle;
+            VehiclesInGarage.TryGetValue(i_License, out vehicle);
+            return vehicle;
         }
     }
 }

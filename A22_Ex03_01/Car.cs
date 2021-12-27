@@ -18,6 +18,11 @@ namespace A22_Ex03_01
         {
             m_Color = i_Color;
             m_NumberOfDoors = i_NumberOfDoors; //need to check
+            for(int i = 0; i < 3; i++)
+            {
+                i_Wheels.Add(new Wheel("carWheels" , 29 , 29));
+            }
+
         }
 
         public eColor Color
@@ -53,9 +58,9 @@ namespace A22_Ex03_01
             }
         }
 
-        public void ReFuel(float i_AmountToFuel , eFuelType i_FuelType) //need to check maybe not needed
+        /*public void ReFuel(float i_AmountToFuel , eFuelType i_FuelType) //need to check maybe not needed
         {
             (Engine as FuelEngine).ReFuel(i_AmountToFuel , i_FuelType);
-        }
+        }*/
     }
 }

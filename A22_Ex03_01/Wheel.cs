@@ -17,7 +17,7 @@ namespace A22_Ex03_01
             m_CurrentAirPressure = i_CurrentAirPressure;
             m_MaxAirPressure = i_MaxAirPressure;
         }
-        public void inflate(int i_AddAirPressure)
+        public void Inflate(float i_AddAirPressure)
         {
             if(CurrentAirPressure + i_AddAirPressure <= MaxAirPressure && i_AddAirPressure > 0)
             {

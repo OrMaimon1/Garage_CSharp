@@ -12,7 +12,7 @@ namespace A22_Ex03_01
         private float m_EnergySourceLeft;
         private readonly List<Wheel> m_Wheels; 
         private Engine m_Engine; 
-        private Customer m_Customer; //need to check with david
+        private InfoOnCar m_InfoOnCar; //need to check with david
 
         public Vehicle(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft,  
                         List<Wheel> i_Wheels, Engine i_Engine)
@@ -56,6 +56,13 @@ namespace A22_Ex03_01
             }
             
         }
+        public InfoOnCar InfoOnCar
+        {
+            get
+            {
+                return m_InfoOnCar;
+            }
+        }
         public List<Wheel> Wheels {
             get
             {
@@ -67,7 +74,7 @@ namespace A22_Ex03_01
         //{
         //    foreach (Wheel wheel in Wheels)
         //    {
-        //        wheel.inflate(i_AirAmountToAdd);
+        //        wheel.Inflate(i_AirAmountToAdd);
         //    }
         //}
     }
