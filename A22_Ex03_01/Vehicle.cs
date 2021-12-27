@@ -10,19 +10,18 @@ namespace A22_Ex03_01
         private string m_VehicleModel;
         private string m_LicenseNumber;
         private float m_EnergySourceLeft;
-        private eVehicleState m_VehicleState; //need to check with david
-        private List<Wheel> m_Wheels; //need to check with david
-        private Engine m_Engine; //need to check with david
+        private readonly List<Wheel> m_Wheels; 
+        private Engine m_Engine; 
+        private Customer m_Customer; //need to check with david
 
-        public Vehicle(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft, string i_OwnerName, 
-                       string i_PhoneNumber, eVehicleState i_VehicleState, List<Wheel> i_Wheels, Engine i_Engine)
+        public Vehicle(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft,  
+                        List<Wheel> i_Wheels, Engine i_Engine)
         {
             m_VehicleModel = i_VehicleModel;
             m_LicenseNumber = i_LicenseNumber;
             m_EnergySourceLeft = i_EnergySourceLeft;
-            m_VehicleState = i_VehicleState;
-            m_Wheels = new List<Wheel>(); //need to check
-            //m_Engine = new Engine(); //need to check
+            m_Wheels = new List<Wheel>(); 
+            m_Engine = i_Engine;
         }
 
         public string VehicleModel
@@ -42,21 +41,11 @@ namespace A22_Ex03_01
         {
             get
             {
-                return Engine.EnergySourceLeft;
+                return m_EnergySourceLeft;
             }
             set
             {
                 m_EnergySourceLeft = value;
-            }
-        }
-        public eVehicleState VehicleState {
-            get
-            {
-                return VehicleState;
-            }
-            set
-            {
-                m_VehicleState = value;
             }
         }
         public Engine Engine
@@ -74,12 +63,12 @@ namespace A22_Ex03_01
             }
         }
 
-        public void InflateWheels(int i_AirAmountToAdd)
-        {
-            foreach (Wheel wheel in Wheels)
-            {
-                wheel.inflate(i_AirAmountToAdd);
-            }
-        }
+        //public void InflateWheels(int i_AirAmountToAdd)
+        //{
+        //    foreach (Wheel wheel in Wheels)
+        //    {
+        //        wheel.inflate(i_AirAmountToAdd);
+        //    }
+        //}
     }
 }

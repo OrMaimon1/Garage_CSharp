@@ -9,20 +9,22 @@ namespace A22_Ex03_01
     {
         private float m_MaxEnergySource;
         private float m_EnergySourceLeft;
-        //private FuelEngine m_FuelEngine;
-        //private ElectricEngine m_ElectricEngine;
 
-        public Engine()
+        public Engine(float i_MaxEnergySource, float i_EnergySourceLeft)
         {
-
+            m_MaxEnergySource = i_MaxEnergySource;
+            m_EnergySourceLeft = i_EnergySourceLeft;
         }
 
-        //public virtual void ReSupplyEnergySource(float i_AmountToFuel ){}
         public float MaxEnergySource
         {
             get
             {
                 return this.m_MaxEnergySource;
+            }
+            set
+            {
+                m_MaxEnergySource = value;
             }
         }
 

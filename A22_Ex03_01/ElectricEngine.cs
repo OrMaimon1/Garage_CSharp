@@ -7,15 +7,23 @@ namespace A22_Ex03_01
 {
     public class ElectricEngine : Engine
     {
-        //private float m_TimeRemainOnBattery;
-        //private float m_MaxTimeOnBattery;
+        public ElectricEngine(float i_MaxEnergySource, float i_EnergySourceLeft)
+            : base(i_MaxEnergySource, i_EnergySourceLeft)
+        {
+            
+        }
 
         public void Recharge(float i_AmountToAdd)
         {
-            if(EnergySourceLeft + i_AmountToAdd <= MaxEnergySource)
+            if(EnergySourceLeft + i_AmountToAdd <= MaxEnergySource && i_AmountToAdd > 0)
             {
                 EnergySourceLeft += i_AmountToAdd;
             }
+            else
+            {
+                throw new ValueOutOfRangeException(EnergySourceLeft , MaxEnergySource); //need to check
+            }
+            
         }
 
     }

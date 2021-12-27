@@ -9,12 +9,11 @@ namespace A22_Ex03_01
     public class FuelEngine : Engine
     {
         private eFuelType m_FuelType;
-        //private float m_CurrentFuelAmount;
-        //private float m_MaxFuelAmount;
 
-        public FuelEngine(eFuelType i_FuelType)
+        public FuelEngine(float i_MaxEnergySource, float i_EnergySourceLeft, eFuelType i_FuelType)
+            :base(i_MaxEnergySource, i_EnergySourceLeft)
         {
-            this.m_FuelType = i_FuelType;
+            m_FuelType = i_FuelType;
         }
         public eFuelType FuelType 
         { 
@@ -28,35 +27,18 @@ namespace A22_Ex03_01
             }
         }
 
-        /*public float CurrentFuelAmount { 
-            get
-            {
-                return m_CurrentFuelAmount;
-            }
-            set
-            {
-                m_CurrentFuelAmount = value;
-            }
-        }*/
-
-        /*public float MaxFuelAmount {
-            get
-            {
-                return m_MaxFuelAmount;
-            } 
-            set
-            {
-                MaxFuelAmount = value;
-            }
-        }*/
 
         public void ReFuel(float i_AmountToFuel, eFuelType i_FuelType)
         {
             if(FuelType == i_FuelType)
             {
-                if(EnergySourceLeft + i_AmountToFuel <= MaxEnergySource)
+                if(EnergySourceLeft + i_AmountToFuel <= MaxEnergySource && i_AmountToFuel > 0)
                 {
                     EnergySourceLeft += i_AmountToFuel;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(EnergySourceLeft, MaxEnergySource); //need to check
                 }
             }
         }

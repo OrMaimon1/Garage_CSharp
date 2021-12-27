@@ -11,9 +11,9 @@ namespace A22_Ex03_01
         private int m_EngineVolume;
         private eLicenseType m_LicenseType;
 
-        public Motorcycle(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft, string i_OwnerName, string i_PhoneNumber,
-                          eVehicleState i_VehicleState, List<Wheel> i_Wheels, Engine i_Engine, int i_EngineVolume, eLicenseType i_LicenseType)
-            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_OwnerName, i_PhoneNumber, i_VehicleState, i_Wheels, i_Engine)
+        public Motorcycle(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft,
+                          List<Wheel> i_Wheels, Engine i_Engine, int i_EngineVolume, eLicenseType i_LicenseType)
+            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, i_Engine)
         {
             //Wheels = new List<Wheel>(2);
             Wheels.Add(null);// need to check

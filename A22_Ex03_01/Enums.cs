@@ -34,4 +34,13 @@ namespace A22_Ex03_01
         Octan95,
         Solar
     }
+
+    public enum eVehicleType
+    {
+        ElectricMotorcycle,
+        FuelMotorcycle,
+        ElectricCar,
+        FuelCar,
+        Truck
+    }
 }

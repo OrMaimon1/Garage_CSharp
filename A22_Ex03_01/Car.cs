@@ -12,9 +12,9 @@ namespace A22_Ex03_01
         private int m_NumberOfDoors;
 
         public Car(
-            string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft, string i_OwnerName, string i_PhoneNumber, 
-            eVehicleState i_VehicleState, List<Wheel> i_Wheels, Engine i_Engine, eColor i_Color, int i_NumberOfDoors)
-            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_OwnerName, i_PhoneNumber, i_VehicleState, i_Wheels, i_Engine)
+            string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft, List<Wheel> i_Wheels,
+            Engine i_Engine, eColor i_Color, int i_NumberOfDoors)
+            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, i_Engine)
         {
             m_Color = i_Color;
             m_NumberOfDoors = i_NumberOfDoors; //need to check
@@ -53,9 +53,7 @@ namespace A22_Ex03_01
             }
         }
 
-        
-
-        public void ReFuel(float i_AmountToFuel , eFuelType i_FuelType)
+        public void ReFuel(float i_AmountToFuel , eFuelType i_FuelType) //need to check maybe not needed
         {
             (Engine as FuelEngine).ReFuel(i_AmountToFuel , i_FuelType);
         }
