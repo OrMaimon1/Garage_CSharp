@@ -31,5 +31,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Ui.cs" />
+    <Compile Include="UiManeger.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\A22_Ex03_01\A22_Ex03_01.csproj">
+      <Project>{5dc92e7f-31de-42fc-b680-a2e298699e2c}</Project>
+      <Name>A22_Ex03_01</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

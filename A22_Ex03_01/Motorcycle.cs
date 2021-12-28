@@ -39,5 +39,6 @@ namespace A22_Ex03_01
                 m_LicenseType = value;
             }
         }  
+
     }
 }

@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using A22_Ex03_01;
 
-namespace A22_Ex03_01
+namespace Ex03.ConsoleUI
 {
-    public class Program
+    class UiManeger
     {
-
+        private Garage Garage;
     }
 }
