@@ -11,15 +11,10 @@ namespace A22_Ex03_01
         private float m_CargoCapacity;
 
         public Truck(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft,
-                     List<Wheel> i_Wheels, Engine i_Engine, bool i_HasCargo, float i_CargoCapacity)
-            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, i_Engine)
+                     List<Wheel> i_Wheels, Engine i_Engine, InfoOnCar i_InfoOnCar)
+            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, i_Engine , i_InfoOnCar)
         {
-            m_HasCargo = i_HasCargo;
-            m_CargoCapacity = i_CargoCapacity;
-            for(int i = 0; i < 15; i++)
-            {
-                Wheels.Add(new Wheel("TruckWheel" , 25 , 25));
-            }
+            
         }
         public bool HasCargo
         {

@@ -10,18 +10,19 @@ namespace A22_Ex03_01
         private string m_VehicleModel;
         private string m_LicenseNumber;
         private float m_EnergySourceLeft;
-        private readonly List<Wheel> m_Wheels; 
+        private List<Wheel> m_Wheels; 
         private Engine m_Engine; 
         private InfoOnCar m_InfoOnCar; //need to check with david
 
         public Vehicle(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft,  
-                        List<Wheel> i_Wheels, Engine i_Engine)
+                        List<Wheel> i_Wheels, Engine i_Engine, InfoOnCar i_InfoOnCar)
         {
             m_VehicleModel = i_VehicleModel;
             m_LicenseNumber = i_LicenseNumber;
             m_EnergySourceLeft = i_EnergySourceLeft;
-            m_Wheels = new List<Wheel>(); 
+            m_Wheels = i_Wheels; 
             m_Engine = i_Engine;
+            m_InfoOnCar = i_InfoOnCar;
         }
 
         public string VehicleModel
@@ -70,12 +71,5 @@ namespace A22_Ex03_01
             }
         }
 
-        //public void InflateWheels(int i_AirAmountToAdd)
-        //{
-        //    foreach (Wheel wheel in Wheels)
-        //    {
-        //        wheel.Inflate(i_AirAmountToAdd);
-        //    }
-        //}
     }
 }

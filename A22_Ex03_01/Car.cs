@@ -13,15 +13,9 @@ namespace A22_Ex03_01
 
         public Car(
             string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft, List<Wheel> i_Wheels,
-            Engine i_Engine, eColor i_Color, int i_NumberOfDoors)
-            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, i_Engine)
+            Engine i_Engine, InfoOnCar i_InfoOnCar)
+            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, i_Engine, i_InfoOnCar)
         {
-            m_Color = i_Color;
-            m_NumberOfDoors = i_NumberOfDoors; //need to check
-            for(int i = 0; i < 3; i++)
-            {
-                i_Wheels.Add(new Wheel("carWheels" , 29 , 29));
-            }
 
         }
 

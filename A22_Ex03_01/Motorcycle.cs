@@ -12,13 +12,10 @@ namespace A22_Ex03_01
         private eLicenseType m_LicenseType;
 
         public Motorcycle(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft,
-                          List<Wheel> i_Wheels, Engine i_Engine, int i_EngineVolume, eLicenseType i_LicenseType)
-            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, i_Engine)
+                          List<Wheel> i_Wheels, Engine i_Engine, InfoOnCar i_InfoOnCar)
+            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, i_Engine, i_InfoOnCar)
         {
-            for(int i = 0; i < 1; i++)
-            {
-                Wheels.Add(new Wheel("MotorWheel" , 30, 30));
-            }
+            
         }
 
         public int EngineVolume {
