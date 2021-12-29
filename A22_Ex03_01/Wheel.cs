@@ -11,10 +11,10 @@ namespace A22_Ex03_01
         private float m_CurrentAirPressure;
         private float m_MaxAirPressure;
 
-        public Wheel(string i_ManufacturerName , float i_CurrentAirPressure , float i_MaxAirPressure)
+        public Wheel(float i_MaxAirPressure)
         {
-            m_ManufacturerName = i_ManufacturerName;
-            m_CurrentAirPressure = i_CurrentAirPressure;
+            m_ManufacturerName = string.Empty;
+            m_CurrentAirPressure = 0;
             m_MaxAirPressure = i_MaxAirPressure;
         }
         public void Inflate(float i_AddAirPressure)
@@ -28,7 +28,6 @@ namespace A22_Ex03_01
                 throw new ValueOutOfRangeException(CurrentAirPressure, MaxAirPressure); //need to check 
             }
         }
-
         public string ManufacturerName
         {
             get

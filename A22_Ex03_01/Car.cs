@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -9,14 +9,59 @@ namespace A22_Ex03_01
     public class Car : Vehicle
     {
         private eColor m_Color;
-        private int m_NumberOfDoors;
+        private eNumberOfDoors m_NumberOfDoors;
 
-        public Car(
-            string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft, List<Wheel> i_Wheels,
-            Engine i_Engine, InfoOnCar i_InfoOnCar)
-            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, i_Engine, i_InfoOnCar)
+        public Car(string i_LicenseNumber, int i_NumberOfWheels, float i_MaxAirPressureForWheels,Engine i_Engine)
+            : base(i_LicenseNumber, i_NumberOfWheels)
         {
+            CreateTheWheels(i_MaxAirPressureForWheels, i_NumberOfWheels);
+            Engine = i_Engine;
+            //Engine = new FuelEngine(i_MaxTankCapacity, 0, i_fuelType);
+        }
 
+        public sealed override Hashtable FetchUniqueInfo()
+        {
+            Garage tempGarageManager = new Garage();
+            Hashtable extraInfoMenu = new Hashtable();
+            eColor noneCarColor = eColor.None;
+            eNumberOfDoors noneNumberOfDoors = eNumberOfDoors.None;
+
+            extraInfoMenu.Add(k_CarColorMessage, tempGarageManager.GeneralMenu(noneCarColor).ToString());
+            extraInfoMenu.Add(k_NumberOfDoorsMessage, tempGarageManager.GeneralMenu(noneNumberOfDoors).ToString());
+
+            return extraInfoMenu;
+        }
+
+        public sealed override Hashtable FetchUniqueInfo()
+        {
+            Garage tempGarageManager = new Garage();
+            Hashtable extraInfoMenu = new Hashtable();
+            eColor noneCarColor = eColor.None;
+            eNumberOfDoors noneNumberOfDoors = eNumberOfDoors.None;
+
+            extraInfoMenu.Add(k_CarColorMessage, tempGarageManager.GeneralMenu(noneCarColor).ToString());
+            extraInfoMenu.Add(k_NumberOfDoorsMessage, tempGarageManager.GeneralMenu(noneNumberOfDoors).ToString());
+
+            return extraInfoMenu;
+        }
+
+        public sealed override void UpdateUniqueInfo(string i_KeyMessage, string i_UserInput)
+        {
+            Garage tempGarageManager = new Garage();
+
+            switch (i_KeyMessage)
+            {
+                case k_CarColorMessage:
+                    eColor noneCarColor = eColor.None;
+                    tempGarageManager.ValidateUsersInputBasedOnTheRangeOfThisEnum(i_UserInput, noneCarColor);
+                    m_Color = (eColor)Enum.Parse(typeof(eColor), i_UserInput);
+                    break;
+                case k_NumberOfDoorsMessage:
+                    eNumberOfDoors noneNumberOfDoors = eNumberOfDoors.None;
+                    tempGarageManager.ValidateUsersInputBasedOnTheRangeOfThisEnum(i_UserInput, noneNumberOfDoors);
+                    m_NumberOfDoors = (eNumberOfDoors)Enum.Parse(typeof(eNumberOfDoors), i_UserInput);
+                    break;
+            }
         }
 
         public eColor Color
@@ -31,7 +76,7 @@ namespace A22_Ex03_01
             }
         }
 
-        public int NumberOfDoors
+        public eNumberOfDoors NumberOfDoors
         {
             get
             {
@@ -40,21 +85,10 @@ namespace A22_Ex03_01
             }
             set
             {
-                if(value >= 2 && value <= 5) //need to check
-                {
-                    m_NumberOfDoors = value;
-                }
-                else
-                {
-                    //ArgumentException
-                }
-                
-            }
-        }
+                m_NumberOfDoors = value;
 
-        /*public void ReFuel(float i_AmountToFuel , eFuelType i_FuelType) //need to check maybe not needed
-        {
-            (Engine as FuelEngine).ReFuel(i_AmountToFuel , i_FuelType);
-        }*/
+            }
+
+        }
     }
 }

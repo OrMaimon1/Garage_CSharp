@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
 
 namespace A22_Ex03_01
 {
@@ -11,11 +12,56 @@ namespace A22_Ex03_01
         private int m_EngineVolume;
         private eLicenseType m_LicenseType;
 
-        public Motorcycle(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft,
-                          List<Wheel> i_Wheels, Engine i_Engine, InfoOnCar i_InfoOnCar)
-            : base(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, i_Engine, i_InfoOnCar)
+        public Motorcycle(string i_LicenseNumber, int i_NumberOfWheels, float i_MaxAirPressureForWheels,Engine i_Engine)
+            : base( i_LicenseNumber,i_NumberOfWheels)
         {
-            
+            CreateTheWheels(i_MaxAirPressureForWheels, i_NumberOfWheels);
+            Engine = i_Engine;
+            //Engine = new FuelEngine(i_MaxTankCapacity, 0, i_fuelType);
+        }
+
+        public sealed override Hashtable FetchUniqueInfo()
+        {
+            Garage tempGarageManager = new Garage();
+            Hashtable extraInfoMenu = new Hashtable();
+            eLicenseType noneLicenseType = eLicenseType.None;
+
+            extraInfoMenu.Add("Choose the license type of the motorcycle:", tempGarageManager.GeneralMenu(noneLicenseType).ToString());
+            extraInfoMenu.Add("Please enter your engine volume a positive number between 0 - 3000: ", null);
+
+            return extraInfoMenu;
+        }
+
+        public sealed override void UpdateUniqueInfo(string i_KeyMessage, string i_UserInput)
+        {
+            Garage tempGarageManager = new Garage();
+            switch (i_KeyMessage)
+            {
+                case k_MotorcycleLicenseTypeMessage:
+                    eLicenseType noneLicenseType = eLicenseType.None;
+                    tempGarageManager.ValidateUsersInputBasedOnTheRangeOfThisEnum(i_UserInput, noneLicenseType);
+                    m_LicenseType = (eLicenseType)Enum.Parse(typeof(eLicenseType), i_UserInput);
+                    break;
+                case k_MotorcycleEngineVolumeMessage:
+                    validatingEngineVolumeInput(i_UserInput);
+                    m_EngineVolume = int.Parse(i_UserInput);
+                    break;
+            }
+        }
+
+        private static void validatingEngineVolumeInput(string i_UserInput)
+        {
+            int numberForParse;
+
+            if (!int.TryParse(i_UserInput, out numberForParse))
+            {
+                throw new FormatException("Wrong input");
+            }
+
+            if (numberForParse < 0)
+            {
+                throw new ValueOutOfRangeException(3000, 0);
+            }
         }
 
         public int EngineVolume {

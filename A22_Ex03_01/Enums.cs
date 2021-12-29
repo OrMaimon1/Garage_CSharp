@@ -15,6 +15,7 @@ namespace A22_Ex03_01
     }
     public enum eLicenseType
     {
+        None,
         A,
         A2,
         AA,
@@ -22,6 +23,7 @@ namespace A22_Ex03_01
     }
     public enum eColor
     {
+        None,
         Red,
         White,
         Black,
@@ -29,6 +31,7 @@ namespace A22_Ex03_01
     }
     public enum eFuelType
     {
+        None,
         Octan98,
         Octan96,
         Octan95,
@@ -37,10 +40,20 @@ namespace A22_Ex03_01
 
     public enum eVehicleType
     {
+        None,
         ElectricMotorcycle,
         FuelMotorcycle,
         ElectricCar,
         FuelCar,
         Truck
+    }
+
+    public enum eNumberOfDoors
+    {
+        None,
+        TwoDoors,
+        ThreeDoors,
+        FourDoors,
+        FiveDoors
     }
 }

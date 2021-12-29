@@ -44,5 +44,33 @@ namespace Ex03.ConsoleUI
         {
             string
         }
+
+
+        public void EnteringGeneralInfo(GarageManager.VehicleInGarage i_VehicleInGarage)
+        {
+            string fullName = string.Empty;
+            string phoneNumber = string.Empty;
+            string modelName = string.Empty;
+            float energySourceLeft = 0;
+            string manufactureOfTheWheels = string.Empty;
+
+            Console.WriteLine("Please enter your name: ");
+            fullName = Console.ReadLine();
+            ValidateThatTheInputIsNotEmpty(fullName);
+            Console.WriteLine("Please enter your phone number: ");
+            phoneNumber = Console.ReadLine();
+            ValidateThatTheInputIsNotEmpty(phoneNumber);
+            Console.WriteLine("Please enter the model of the vehicle: ");
+            modelName = Console.ReadLine();
+            ValidateThatTheInputIsNotEmpty(modelName);
+            Console.WriteLine("Please enter the manufacture of the wheels: ");
+            ValidateThatTheInputIsNotEmpty(energySourceLeft); /// added need to check
+            Console.WriteLine("Please enter the manufacture of the wheels: ");
+            manufactureOfTheWheels = Console.ReadLine();
+            ValidateThatTheInputIsNotEmpty(manufactureOfTheWheels);
+            m_Garage.AddGeneralInfo(i_VehicleInGarage, fullName, phoneNumber, modelName);
+            i_VehicleInGarage.CurrentVehicle.InsertManufactureName(manufactureOfTheWheels);
+        }
+
     }
 }

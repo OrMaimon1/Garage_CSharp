@@ -8,66 +8,52 @@ namespace A22_Ex03_01
 {
     public class VehicleFactory
     {
-        public static Vehicle AddVehicle(eVehicleType i_VehicleType, string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft, 
-                                         List<Wheel> i_Wheels, Engine i_Engine, InfoOnCar i_InfoOnCar)
+        /// fuel car const info
+        private const float k_wheelPressureForCars = 29;
+        private const float k_FuelCarMaxTankCapacity = 48f;
+        private const byte k_NumberOfWheelsForCars = 4;
+        private const float k_ElectricalCarMaxBatteryLife = 2.6f;
+        /// fuel motorcycle const info
+        private const float k_wheelPressureForMotorycle = 30;
+        private const float k_FuelMotorcycleMaxTankCapacity = 5.8f;
+        private const byte k_NumberOfWheelsForMotorcycle = 2;
+        private const float k_ElectricalMotorcycleMaxBatteryLife = 2.3f;
+        /// truck const info
+        private const float k_wheelPressureForTrucks = 25;
+        private const float k_TruckMaxTankCapacity = 130f;
+        private const byte k_NumberOfWheelsForTruck = 16;
+        
+        public static Vehicle AddVehicle(string i_UserChoice, string i_LicenseNumber)
         {
+            eVehicleType userChoiceForVehicleType;
             Vehicle newVehicle = null;
-            switch(i_VehicleType)
+
+            userChoiceForVehicleType = (eVehicleType)Enum.Parse(typeof(eVehicleType), i_UserChoice);
+            switch (userChoiceForVehicleType)
             {
-                case eVehicleType.FuelMotorcycle: // energy = (energy /100) *5.7
-                    FuelEngine motorcycleFuelEngine = new FuelEngine(5.8f, 0, eFuelType.Octan98);
-                    newVehicle = new Motorcycle(i_VehicleModel, i_LicenseNumber , i_EnergySourceLeft, i_Wheels, motorcycleFuelEngine, i_InfoOnCar);
-                    break;
-                case eVehicleType.ElectricMotorcycle:
-                    ElectricEngine motorcycleElectricEngine = new ElectricEngine(2.3f, 0);
-                    newVehicle = new Motorcycle(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, motorcycleElectricEngine, i_InfoOnCar);
-                    break;
+
                 case eVehicleType.FuelCar:
-                    FuelEngine carFuelEngine = new FuelEngine(48,0,eFuelType.Octan95);
-                    newVehicle = new Car(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, carFuelEngine, i_InfoOnCar);
+                    Engine carFuelEngine = new FuelEngine(k_FuelCarMaxTankCapacity,0f, eFuelType.Octan95);
+                    newVehicle = new Car(i_LicenseNumber, k_NumberOfWheelsForCars,k_wheelPressureForCars,carFuelEngine);
                     break;
-                case eVehicleType.ElectricCar:
-                    ElectricEngine carElectricEngine = new ElectricEngine(2.6f,0);
-                    newVehicle = new Car(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, carElectricEngine, i_InfoOnCar);
+                case eVehicleType.FuelMotorcycle:
+                    Engine motorcycleFuelEngine = new FuelEngine(k_FuelMotorcycleMaxTankCapacity,0,eFuelType.Octan98);
+                    newVehicle = new Motorcycle(i_LicenseNumber, k_NumberOfWheelsForMotorcycle,k_wheelPressureForMotorycle,motorcycleFuelEngine);
                     break;
                 case eVehicleType.Truck:
-                    FuelEngine truckFuelEngine= new FuelEngine(130, 0 ,eFuelType.Solar);
-                    newVehicle = new Truck(i_VehicleModel, i_LicenseNumber, i_EnergySourceLeft, i_Wheels, truckFuelEngine, i_InfoOnCar);
+                    Engine truckFuelEngine = new FuelEngine(k_TruckMaxTankCapacity,0, eFuelType.Solar);
+                    newVehicle = new Truck(i_LicenseNumber,k_NumberOfWheelsForTruck,k_wheelPressureForTrucks,truckFuelEngine);
                     break;
-                default:
-                    throw new Exception("");
+                case eVehicleType.ElectricCar:
+                    Engine carElectricEngine = new ElectricEngine(k_ElectricalCarMaxBatteryLife,0);
+                    newVehicle = new Car(i_LicenseNumber, k_NumberOfWheelsForCars, k_wheelPressureForCars,carElectricEngine); //need to clean
+                    break;
+                case eVehicleType.ElectricMotorcycle:
+                    Engine motorcycleElectricEngine = new ElectricEngine(k_ElectricalMotorcycleMaxBatteryLife, 0);
+                    newVehicle = new Motorcycle(i_LicenseNumber, k_NumberOfWheelsForMotorcycle, k_wheelPressureForMotorycle,motorcycleElectricEngine); // need to clean
+                    break;
             }
             return newVehicle;
-        }
-
-        public static Wheel AddWheels(eVehicleType i_VehicleType, string i_ManufacturerName, float i_CurrentAirPressure, float i_MaxAirPressure)
-        {
-            Wheel wheel;
-            int motorcycleWheelPsi = 30;
-            int carWheelPsi = 29;
-            int TruckWheelPsi = 25;
-            switch (i_VehicleType)
-            {
-                case eVehicleType.FuelMotorcycle:
-                    wheel = new Wheel(i_ManufacturerName, i_CurrentAirPressure, motorcycleWheelPsi);
-                    break;
-                case eVehicleType.ElectricMotorcycle:
-                    wheel = new Wheel(i_ManufacturerName, i_CurrentAirPressure, motorcycleWheelPsi);
-                    break;
-                case eVehicleType.FuelCar:
-                    wheel = new Wheel(i_ManufacturerName, i_CurrentAirPressure, carWheelPsi);
-                    break;
-                case eVehicleType.ElectricCar:
-                    wheel = new Wheel(i_ManufacturerName, i_CurrentAirPressure, carWheelPsi);
-                    break;
-                case eVehicleType.Truck:
-                    wheel = new Wheel(i_ManufacturerName, i_CurrentAirPressure, TruckWheelPsi);
-                    break;
-                default:
-                    throw new Exception("");
-            }
-
-            return wheel;
         }
 
 

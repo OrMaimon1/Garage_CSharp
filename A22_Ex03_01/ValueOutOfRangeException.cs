@@ -16,6 +16,11 @@ namespace A22_Ex03_01
             m_MinValue = i_MinValue;
             Console.WriteLine(format:" ", i_MinValue, i_MaxValue);// need to check with exception
         }
+        public ValueOutOfRangeException(float i_Value)
+        {
+            m_MinValue = 0;
+            Console.WriteLine(format: "",m_MinValue,i_Value);
+        }
 
         public float MaxValue { 
             get

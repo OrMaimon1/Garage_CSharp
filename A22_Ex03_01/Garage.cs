@@ -9,7 +9,7 @@ namespace A22_Ex03_01
     public class Garage
     {
         private Dictionary<string, Vehicle> m_VehiclesInGarage;
-
+        private InfoOnCar m_infoOnCar;
         public Garage()
         {
             m_VehiclesInGarage = new Dictionary<string, Vehicle>();
@@ -30,7 +30,7 @@ namespace A22_Ex03_01
             vehicle.InfoOnCar.VehicleState = eVehicleState.Fixing;
         }
 
-        public void AddNewVehicle(string i_license , Vehicle i_Vehicle)
+        public void AddNewVehicle(string i_license, Vehicle i_Vehicle)
         {
             VehiclesInGarage.Add(i_license, i_Vehicle);
         }
@@ -38,7 +38,7 @@ namespace A22_Ex03_01
         public List<string> ShowListOfLicenses()
         {
             List<string> listOfLicenses = new List<string>();
-            foreach(KeyValuePair<string, Vehicle> vehicle in VehiclesInGarage)
+            foreach (KeyValuePair<string, Vehicle> vehicle in VehiclesInGarage)
             {
                 listOfLicenses.Add(vehicle.Value.LicenseNumber);
             }
@@ -53,13 +53,13 @@ namespace A22_Ex03_01
             vehicle.InfoOnCar.VehicleState = i_NewState;
         }
 
-        public void InflateWheelsToMaximumPressure(string i_License)
+        public void InflateWheelsToMaximumPressure(string i_License)//in vehical need to check
         {
             Vehicle vehicle;
             float currentPressure;
             float maxPressure;
             VehiclesInGarage.TryGetValue(i_License, out vehicle);
-            foreach(Wheel wheel in vehicle.Wheels)
+            foreach (Wheel wheel in vehicle.Wheels)
             {
                 currentPressure = wheel.CurrentAirPressure;
                 maxPressure = wheel.MaxAirPressure;
@@ -92,6 +92,26 @@ namespace A22_Ex03_01
         {
             return VehiclesInGarage.ContainsKey(i_LicenseNumber);
         }
-    }
 
+        public StringBuilder GeneralMenu(Enum i_TypeOfEnum) //added
+        {
+            int index = 0;
+
+            StringBuilder tempStringBuilder = new StringBuilder();
+            Type typeOfEnum = i_TypeOfEnum.GetType();
+            tempStringBuilder.AppendLine();
+            foreach (string state in Enum.GetNames(typeOfEnum))
+            {
+                if (state != "None")
+                {
+                    tempStringBuilder.Append(index + ") ");
+                    tempStringBuilder.Append(state);
+                    tempStringBuilder.AppendLine();
+                }
+
+                index++;
+            }
+            return tempStringBuilder;
+        }
+    }
 }

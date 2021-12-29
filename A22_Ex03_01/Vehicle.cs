@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections;
 
 namespace A22_Ex03_01
 {
@@ -10,19 +11,42 @@ namespace A22_Ex03_01
         private string m_VehicleModel;
         private string m_LicenseNumber;
         private float m_EnergySourceLeft;
-        private List<Wheel> m_Wheels; 
+        private readonly List<Wheel> r_Wheels; 
         private Engine m_Engine; 
-        private InfoOnCar m_InfoOnCar; //need to check with david
 
-        public Vehicle(string i_VehicleModel, string i_LicenseNumber, float i_EnergySourceLeft,  
-                        List<Wheel> i_Wheels, Engine i_Engine, InfoOnCar i_InfoOnCar)
+        public Vehicle(string i_LicenseNumber, int i_NumberOfWheels)
         {
-            m_VehicleModel = i_VehicleModel;
             m_LicenseNumber = i_LicenseNumber;
-            m_EnergySourceLeft = i_EnergySourceLeft;
-            m_Wheels = i_Wheels; 
-            m_Engine = i_Engine;
-            m_InfoOnCar = i_InfoOnCar;
+            r_Wheels = new List<Wheel>(i_NumberOfWheels);
+        }
+
+        public abstract Hashtable FetchUniqueInfo();
+        public abstract void UpdateUniqueInfo(string i_KeyMessage, string i_UserInput);
+
+        public List<Wheel> CreateTheWheels(float i_MaxAirPressureForWheels, int i_NumberOfWheels) // need to check
+        {
+            List<Wheel> wheels = new List<Wheel>();
+            for (int i = 0; i < i_NumberOfWheels; i++)
+            {
+                wheels.Add(new Wheel(i_MaxAirPressureForWheels));
+            }
+
+            return wheels;
+        }
+
+        public void InsertManufactureName(string i_ManufactureOfTheWheels)
+        {
+            foreach (Wheel wheel in Wheels)
+            {
+                wheel.ManufacturerName = i_ManufactureOfTheWheels;
+            }
+        }
+        public void InflateAirToMax()
+        {
+            foreach (Wheel wheel in Wheels)
+            {
+                wheel.Inflate(wheel.MaxAirPressure - wheel.CurrentAirPressure);
+            }
         }
 
         public string VehicleModel
@@ -55,19 +79,19 @@ namespace A22_Ex03_01
             {
                 return m_Engine;
             }
-            
-        }
-        public InfoOnCar InfoOnCar
-        {
-            get
+            set
             {
-                return m_InfoOnCar;
+                m_Engine = value;
             }
         }
         public List<Wheel> Wheels {
             get
             {
-                return Wheels; //need to check the set
+                return r_Wheels; //need to check the set
+            }
+            set
+            {
+
             }
         }
 
