@@ -95,6 +95,54 @@ namespace Ex03.ConsoleUI
             Console.WriteLine("Please choose which Licenses you wish to view");
             //Need to create a menu for Vehicle state
             Enum.TryParse(Console.ReadLine(), out vehicleState);
+            List<string> licensesToView = Garage.ShowListOfLicenses(vehicleState);
+            foreach(string license in licensesToView)
+            {
+                Console.WriteLine(license);
+            }
+        }
+
+        public void InflateWheelsToMax()
+        {
+            Console.WriteLine("Please enter license number of the vehicle you wish to work on: ");
+            string licenseNumber = Console.ReadLine();
+            //Need to validate license number
+            Garage.InflateWheelsToMaximumPressure(licenseNumber);
+        }
+
+        public void FuelVehicle()
+        {
+            Console.WriteLine("Please enter license number of the vehicle you wish to fuel: ");
+            string licenseNumber = Console.ReadLine();
+            while(!Garage.VehicleExists(licenseNumber))
+            {
+                licenseNumber = Console.ReadLine();
+            }
+            //Need to validte license number input 
+            Console.WriteLine("Please choose type of fuel you wish to use: ");
+            //Need to create FuelType menu
+            eFuelType fuelType;
+            Enum.TryParse(Console.ReadLine(), out fuelType);
+            Console.WriteLine("Please choose the amount you wish to fuel: ");
+            float fuelAmount;
+            float.TryParse(Console.ReadLine(), out fuelAmount);
+            //What happens if fuel amount is invalid
+            Garage.FuelCar(licenseNumber , fuelType , fuelAmount);
+        }
+        public void ChargeVehicle()
+        {
+            Console.WriteLine("Please enter license Number of the vehicle you wish to charge: ");
+            string licenseNumber = Console.ReadLine();
+            while (!Garage.VehicleExists(licenseNumber))
+            {
+                licenseNumber = Console.ReadLine();
+            }
+            //Need to validate license number input
+            Console.WriteLine("Please enter the amount of mkinutes you wish to charge: ");
+            float minutesAmount;
+            float.TryParse(Console.ReadLine(), out minutesAmount);
+            //What happens if minutes amount is invalid
+            Garage.ChargeCar(licenseNumber , minutesAmount);
         }
     }
 }
