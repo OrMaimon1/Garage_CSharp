@@ -53,7 +53,7 @@ namespace Ex03.ConsoleUI
 
 
 
-        public void EnteringGeneralInfo(GarageManager.VehicleInGarage i_VehicleInGarage)
+        public void EnteringGeneralInfo(Garage.VehicleInGarage i_VehicleInGarage)
         {
             string fullName = string.Empty;
             string phoneNumber = string.Empty;

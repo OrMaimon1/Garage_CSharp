@@ -113,5 +113,18 @@ namespace A22_Ex03_01
             }
             return tempStringBuilder;
         }
+
+        public void checkingLicenseInput(string i_UsersLicenseNumber)
+        {
+            int numberForParse;
+            if (!int.TryParse(i_UsersLicenseNumber, out numberForParse))
+            {
+                throw new FormatException("Wrong number please enter numbers between 0-7 digits");
+            }
+            if (numberForParse < 0 || numberForParse > 9999999)
+            {
+                throw new ValueOutOfRangeException(9999999, 0);
+            }
+        }
     }
 }

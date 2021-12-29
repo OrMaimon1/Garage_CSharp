@@ -11,15 +11,14 @@ namespace A22_Ex03_01
         private float m_MinValue;
 
         public  ValueOutOfRangeException(float i_MaxValue, float i_MinValue)
+           : base(string.Format(" out of range of {0} - {1} ", i_MinValue, i_MaxValue))
         {
-            m_MaxValue = i_MaxValue;
-            m_MinValue = i_MinValue;
-            Console.WriteLine(format:" ", i_MinValue, i_MaxValue);// need to check with exception
+            
         }
         public ValueOutOfRangeException(float i_Value)
+            : base(string.Format("out of range {0} - {1} ", 0, i_Value))
         {
-            m_MinValue = 0;
-            Console.WriteLine(format: "",m_MinValue,i_Value);
+
         }
 
         public float MaxValue { 
