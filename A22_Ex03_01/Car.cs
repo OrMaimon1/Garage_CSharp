@@ -35,18 +35,18 @@ namespace A22_Ex03_01
 
         public sealed override void UpdateUniqueInfo(string i_KeyMessage, string i_UserInput)
         {
-            Garage tempGarageManager = new Garage();
+            Garage garage = new Garage();
 
             switch (i_KeyMessage)
             {
                 case k_ChooseCarColorMessage:
                     eColor noneCarColor = eColor.None;
-                    tempGarageManager.ValidateUsersInputBasedOnTheRangeOfThisEnum(i_UserInput, noneCarColor);
+                    garage.EnumInputValidator(i_UserInput, noneCarColor);
                     m_Color = (eColor)Enum.Parse(typeof(eColor), i_UserInput);
                     break;
                 case k_ChooseNumberOfDoorsMessage:
                     eNumberOfDoors noneNumberOfDoors = eNumberOfDoors.None;
-                    tempGarageManager.ValidateUsersInputBasedOnTheRangeOfThisEnum(i_UserInput, noneNumberOfDoors);
+                    garage.EnumInputValidator(i_UserInput, noneNumberOfDoors);
                     m_NumberOfDoors = (eNumberOfDoors)Enum.Parse(typeof(eNumberOfDoors), i_UserInput);
                     break;
             }
@@ -78,5 +78,14 @@ namespace A22_Ex03_01
             }
 
         }
+
+        public override string DetailsOfVehicle()
+        {
+            string details = base.DetailsOfVehicle();
+            details += String.Format(@"Car Color: {0}
+Doors Number: {1}" , Color , NumberOfDoors);
+            return details;
+        }
     }
+
 }

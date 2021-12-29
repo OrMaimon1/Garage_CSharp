@@ -136,7 +136,7 @@ namespace A22_Ex03_01
             return tempStringBuilder;
         }
 
-        public void checkingLicenseInput(string i_UsersLicenseNumber)
+        public void CheckingLicenseInput(string i_UsersLicenseNumber)
         {
             int numberForParse;
             if (!int.TryParse(i_UsersLicenseNumber, out numberForParse))
@@ -146,6 +146,18 @@ namespace A22_Ex03_01
             if (numberForParse < 0 || numberForParse > 9999999)
             {
                 throw new ValueOutOfRangeException(9999999, 0);
+            }
+        }
+
+        public void EnumInputValidator(string i_userInput, Enum i_Enum)
+        {
+            int statesCount;
+            int userInput;
+            int.TryParse(i_userInput, out userInput);
+            statesCount = (int)(Enum.GetNames(i_Enum.GetType()).Length - 1);
+            if(userInput < 1 || userInput > statesCount)
+            {
+                throw new ValueOutOfRangeException(statesCount, 1);
             }
         }
     }

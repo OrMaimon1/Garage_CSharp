@@ -11,6 +11,8 @@ namespace A22_Ex03_01
 
         private int m_EngineVolume;
         private eLicenseType m_LicenseType;
+        private const string k_ChooseLicenseMessage = "Choose the license type of the motorcycle:";
+        private const string k_EnterEngineVolumeMessage = "Please enter your engine volume a positive number between 0 - 3000: ";
 
         public Motorcycle(string i_LicenseNumber, int i_NumberOfWheels, float i_MaxAirPressureForWheels,Engine i_Engine)
             : base( i_LicenseNumber,i_NumberOfWheels)
@@ -26,23 +28,23 @@ namespace A22_Ex03_01
             Hashtable extraInfoMenu = new Hashtable();
             eLicenseType noneLicenseType = eLicenseType.None;
 
-            extraInfoMenu.Add("Choose the license type of the motorcycle:", tempGarageManager.GeneralMenu(noneLicenseType).ToString());
-            extraInfoMenu.Add("Please enter your engine volume a positive number between 0 - 3000: ", null);
+            extraInfoMenu.Add(k_ChooseLicenseMessage, tempGarageManager.GeneralMenu(noneLicenseType).ToString());
+            extraInfoMenu.Add(k_EnterEngineVolumeMessage, null);
 
             return extraInfoMenu;
         }
 
         public sealed override void UpdateUniqueInfo(string i_KeyMessage, string i_UserInput)
         {
-            Garage tempGarageManager = new Garage();
+            Garage garage = new Garage();
             switch (i_KeyMessage)
             {
-                case k_MotorcycleLicenseTypeMessage:
+                case k_ChooseLicenseMessage:
                     eLicenseType noneLicenseType = eLicenseType.None;
-                    tempGarageManager.ValidateUsersInputBasedOnTheRangeOfThisEnum(i_UserInput, noneLicenseType);
+                    garage.EnumInputValidator(i_UserInput, noneLicenseType);
                     m_LicenseType = (eLicenseType)Enum.Parse(typeof(eLicenseType), i_UserInput);
                     break;
-                case k_MotorcycleEngineVolumeMessage:
+                case k_EnterEngineVolumeMessage:
                     validatingEngineVolumeInput(i_UserInput);
                     m_EngineVolume = int.Parse(i_UserInput);
                     break;
@@ -84,7 +86,14 @@ namespace A22_Ex03_01
             { 
                 m_LicenseType = value;
             }
-        }  
+        }
 
+        public override string DetailsOfVehicle()
+        {
+            string details = base.DetailsOfVehicle();
+            details += String.Format(@"Engine Volume: {0}
+License Type: {1}" ,EngineVolume , LicenseType );
+            return details;
+        }
     }
 }

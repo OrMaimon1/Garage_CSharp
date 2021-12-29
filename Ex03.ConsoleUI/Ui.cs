@@ -79,22 +79,25 @@ namespace Ex03.ConsoleUI
                     UiManager.ChargeVehicle();
                     break;
                 case eActionSelector.InflateWheels:
-                    
+                    UiManager.InflateWheelsToMax();
                     break;
                 case eActionSelector.ShowLicensePlate:
+                    UiManager.ViewVehicleLicense();
                     break;
                 case eActionSelector.ReFuelVehicle:
+                    UiManager.FuelVehicle();
                     break;
                 case eActionSelector.ReChargeVehicle:
+                    UiManager.ChargeVehicle();
                     break;
                 case eActionSelector.ShowVehicle:
+                    UiManager.GetVehicleDetails();
                     break;
+                default:
+                    throw new Exception("Please Choose One Of The Options: ");
             }
 
-            if(expr)
-            {
-                
-            }
+
         }
 
 

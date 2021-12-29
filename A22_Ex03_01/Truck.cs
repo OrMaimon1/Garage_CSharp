@@ -10,6 +10,8 @@ namespace A22_Ex03_01
     {
         private bool m_HasCargo;
         private float m_CargoCapacity;
+        private const string k_DoesHaveCargoMessage = "Does the truck has cargo: ";
+        private const string k_CargoCapacityMessage = "The Cargo capacity is: ";
 
         public Truck(string i_LicenseNumber, int i_NumberOfWheels, float i_MaxAirPressureForWheels, Engine i_Engine)
             : base(i_LicenseNumber, i_NumberOfWheels)
@@ -24,8 +26,8 @@ namespace A22_Ex03_01
         {
             Hashtable extraInfoMenu = new Hashtable();
 
-            extraInfoMenu.Add(k_DangerMaterialsMessage, null);
-            extraInfoMenu.Add(k_MaxWightLoadMessage, null);
+            extraInfoMenu.Add(k_DoesHaveCargoMessage, null);
+            extraInfoMenu.Add(k_CargoCapacityMessage, null);
 
             return extraInfoMenu;
         }
@@ -34,8 +36,8 @@ namespace A22_Ex03_01
         {
             switch (i_KeyMessage)
             {
-                case k_DangerMaterialsMessage:
-                    HasCargoValidation(i_UserInput); //תכולה בקירור
+                case k_DoesHaveCargoMessage:
+                    HasCargoValidation(i_UserInput); 
                     if (i_UserInput == "Yes")
                     {
                         m_HasCargo = true;
@@ -43,8 +45,8 @@ namespace A22_Ex03_01
 
                     break;
 
-                case k_MaxWightLoadMessage:
-                    validatingMaxCarryWeight(i_UserInput);
+                case k_CargoCapacityMessage:
+                    CargoCapacityValidating(i_UserInput);
                     m_CargoCapacity = float.Parse(i_UserInput);
                     break;
             }
@@ -69,7 +71,7 @@ namespace A22_Ex03_01
 
             if (numberForParse < 0)
             {
-                throw new ValueOutOfRangeException(3000f, 0f);
+                throw new ValueOutOfRangeException( 0f);
             }
         }
 
@@ -95,6 +97,14 @@ namespace A22_Ex03_01
             {
                 m_CargoCapacity = value;
             }
+        }
+
+        public override string DetailsOfVehicle()
+        {
+            string details = base.DetailsOfVehicle();
+            details += String.Format(@"Has Cargo: {0}
+Cargo Capacity: {1}" , HasCargo , CargoCapacity);
+            return details;
         }
     }
 }

@@ -33,22 +33,29 @@ namespace A22_Ex03_01
 
             return wheels;
         }
-
-        public void InsertManufactureName(string i_ManufactureOfTheWheels)
+        public void InsertWheelManufactureName(string i_ManufactureOfTheWheels)
         {
             foreach (Wheel wheel in Wheels)
             {
                 wheel.ManufacturerName = i_ManufactureOfTheWheels;
             }
         }
-        public void InflateAirToMax()
-        {
-            foreach (Wheel wheel in Wheels)
-            {
-                wheel.Inflate(wheel.MaxAirPressure - wheel.CurrentAirPressure);
-            }
-        }
 
+        public virtual string DetailsOfVehicle()
+        {
+            string details = String.Format(@"License number: {0}
+Model Name: {1}
+Energy Source Precentage Left: {2}
+Energy Source Left: {3}
+Max Energy Source Capacity: {4}
+Number Of Wheels: {5}
+Wheels Manufacturer Name: {6}
+Current Wheel Air Pressure: {7}
+Max Wheel Air Pressure: {8}" ,
+               LicenseNumber , VehicleModel , PercentEnergySourceLeft , Engine.EnergySourceLeft ,
+               Engine.MaxEnergySource , Wheels.Count , Wheels[0].ManufacturerName , Wheels[0].CurrentAirPressure , Wheels[0].MaxAirPressure);
+            return details;
+        }
         public string VehicleModel
         {
             get

@@ -13,7 +13,8 @@ namespace Ex03.ConsoleUI
         }
         public static void Run()
         {
-
+            Ui Ui = new Ui();
+            Ui.Start();
         }
     }
 }

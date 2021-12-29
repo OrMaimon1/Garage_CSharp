@@ -27,6 +27,7 @@ namespace Ex03.ConsoleUI
         {
             Console.WriteLine("Enter the license number of the vehicle (7 digits)");
             string licenseNumber = Console.ReadLine();
+            Garage.CheckingLicenseInput(licenseNumber);
             if(Garage.VehicleExists(licenseNumber))
             {
                 Garage.AddExistingVehicle(licenseNumber);
@@ -54,7 +55,8 @@ namespace Ex03.ConsoleUI
             string fullName = string.Empty;
             string phoneNumber = string.Empty;
             string modelName = string.Empty;
-            float energySourceLeft = i_VehicleInGarage.Vehicle.Engine.EnergySourceLeft / i_VehicleInGarage.Vehicle.Engine.MaxEnergySource;
+            float energySourceLeft = (i_VehicleInGarage.Vehicle.Engine.EnergySourceLeft
+                                      / i_VehicleInGarage.Vehicle.Engine.MaxEnergySource) / 100;
             string manufactureOfTheWheels = string.Empty;
 
             Console.WriteLine("Please enter your name: ");
@@ -67,20 +69,21 @@ namespace Ex03.ConsoleUI
             modelName = Console.ReadLine();
             InputIsNotEmpty(modelName);
             Console.WriteLine("Please enter the manufacture of the wheels: ");
-            ValidateThatTheInputIsNotEmpty(energySourceLeft); /// added need to check
-            Console.WriteLine("Please enter the manufacture of the wheels: ");
             manufactureOfTheWheels = Console.ReadLine();
             InputIsNotEmpty(manufactureOfTheWheels);
-            m_Garage.AddGeneralInfo(i_VehicleInGarage, fullName, phoneNumber, modelName);
-            i_VehicleInGarage.CurrentVehicle.InsertManufactureName(manufactureOfTheWheels);
+            i_VehicleInGarage.OwnerName = fullName;
+            i_VehicleInGarage.PhoneNumber = phoneNumber;
+            i_VehicleInGarage.Vehicle.VehicleModel = modelName;
+            i_VehicleInGarage.Vehicle.PercentEnergySourceLeft = energySourceLeft;
+            i_VehicleInGarage.Vehicle.InsertWheelManufactureName(manufactureOfTheWheels);
+            //m_Garage.AddGeneralInfo(i_VehicleInGarage, fullName, phoneNumber, modelName);
+            //i_VehicleInGarage.CurrentVehicle.InsertWheelManufactureName(manufactureOfTheWheels);
         }
 
         
         public void UpdateVehicleState()
         {
-            Console.WriteLine("Please choose the license number of the vehicle you wish to update");
-            //Need to validate license input
-            string licenseNumber = Console.ReadLine();
+            string licenseNumber = AskUserForLicenseNumber();
             Console.WriteLine("Please choose the new state of the vehicle: ");
             //Need to creaate a menu for vehicle states
             string userChoice = Console.ReadLine();
@@ -104,20 +107,14 @@ namespace Ex03.ConsoleUI
 
         public void InflateWheelsToMax()
         {
-            Console.WriteLine("Please enter license number of the vehicle you wish to work on: ");
-            string licenseNumber = Console.ReadLine();
+            string licenseNumber = AskUserForLicenseNumber();
             //Need to validate license number
             Garage.InflateWheelsToMaximumPressure(licenseNumber);
         }
 
         public void FuelVehicle()
         {
-            Console.WriteLine("Please enter license number of the vehicle you wish to fuel: ");
-            string licenseNumber = Console.ReadLine();
-            while(!Garage.VehicleExists(licenseNumber))
-            {
-                licenseNumber = Console.ReadLine();
-            }
+            string licenseNumber = AskUserForLicenseNumber();
             //Need to validte license number input 
             Console.WriteLine("Please choose type of fuel you wish to use: ");
             //Need to create FuelType menu
@@ -131,12 +128,7 @@ namespace Ex03.ConsoleUI
         }
         public void ChargeVehicle()
         {
-            Console.WriteLine("Please enter license Number of the vehicle you wish to charge: ");
-            string licenseNumber = Console.ReadLine();
-            while (!Garage.VehicleExists(licenseNumber))
-            {
-                licenseNumber = Console.ReadLine();
-            }
+            string licenseNumber = AskUserForLicenseNumber();
             //Need to validate license number input
             Console.WriteLine("Please enter the amount of mkinutes you wish to charge: ");
             float minutesAmount;
@@ -145,12 +137,33 @@ namespace Ex03.ConsoleUI
             Garage.ChargeCar(licenseNumber , minutesAmount);
         }
 
+        public void GetVehicleDetails()
+        {
+            string licenseNumber = AskUserForLicenseNumber();
+            VehicleInGarage vehicle = Garage.GetVehicle(licenseNumber);
+            string detailsOfVehicle = vehicle.Vehicle.DetailsOfVehicle();
+            Console.WriteLine(detailsOfVehicle);
+        }
+
         public void InputIsNotEmpty(string i_Value)
         {
             if(i_Value == String.Empty)
             {
                 throw new ArgumentException("didnt enter value");
             }
+        }
+
+        public string AskUserForLicenseNumber()
+        {
+            Console.WriteLine("Please choose the license number of the vehicle you wish to work on");
+            string licenseNumber = Console.ReadLine();
+            while (!Garage.VehicleExists(licenseNumber))
+            {
+                Console.WriteLine("Could Not find license number , try again");
+                licenseNumber = Console.ReadLine();
+            }
+            //Garage.CheckingLicenseInput(licenseNumber);
+            return licenseNumber;
         }
     }
 }
