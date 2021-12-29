@@ -46,7 +46,9 @@ namespace Ex03.ConsoleUI
                 foreach(string infoToFill in UniqueInfoOfVehicle.Keys)
                 {
                     Console.WriteLine(infoToFill);
+                    Console.WriteLine(vehicle.ShowUniqueInfoMenuForChoice(infoToFill));
                     vehicle.UpdateUniqueInfo(infoToFill , Console.ReadLine());
+                    
                 }
                 Garage.AddNewVehicle(licenseNumber , vehicleInGarage);
             }

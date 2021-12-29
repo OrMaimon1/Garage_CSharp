@@ -52,6 +52,22 @@ namespace A22_Ex03_01
             }
         }
 
+        public override StringBuilder ShowUniqueInfoMenuForChoice(string i_message)
+        {
+            StringBuilder menu = new StringBuilder();
+            Garage garage = new Garage();
+            if(i_message.Equals(k_ChooseCarColorMessage))
+            {
+                menu = garage.GeneralMenu(eColor.None);
+            }
+            else if(i_message.Equals(k_ChooseNumberOfDoorsMessage))
+            {
+                menu = garage.GeneralMenu(eNumberOfDoors.None);
+            }
+
+            return menu;
+        }
+
         public eColor Color
         {
             get
@@ -83,7 +99,8 @@ namespace A22_Ex03_01
         {
             string details = base.DetailsOfVehicle();
             details += String.Format(@"Car Color: {0}
-Doors Number: {1}" , Color , NumberOfDoors);
+Doors Number: {1}
+" , Color , NumberOfDoors);
             return details;
         }
     }

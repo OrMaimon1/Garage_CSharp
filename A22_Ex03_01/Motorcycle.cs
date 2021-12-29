@@ -43,6 +43,7 @@ namespace A22_Ex03_01
                     eLicenseType noneLicenseType = eLicenseType.None;
                     garage.EnumInputValidator(i_UserInput, noneLicenseType);
                     m_LicenseType = (eLicenseType)Enum.Parse(typeof(eLicenseType), i_UserInput);
+                    ShowUniqueInfoMenuForChoice(k_ChooseLicenseMessage);
                     break;
                 case k_EnterEngineVolumeMessage:
                     validatingEngineVolumeInput(i_UserInput);
@@ -51,6 +52,17 @@ namespace A22_Ex03_01
             }
         }
 
+        public override StringBuilder ShowUniqueInfoMenuForChoice(string i_Message)
+        {
+            StringBuilder menu = new StringBuilder();
+            if(i_Message.Equals(k_ChooseLicenseMessage))
+            {
+                Garage garage = new Garage();
+                eLicenseType licenseType = eLicenseType.None;
+                menu = garage.GeneralMenu(eLicenseType.None);
+            }
+            return menu;
+        }
         private static void validatingEngineVolumeInput(string i_UserInput)
         {
             int numberForParse;
