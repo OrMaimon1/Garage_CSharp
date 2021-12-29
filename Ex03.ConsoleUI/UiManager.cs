@@ -59,18 +59,18 @@ namespace Ex03.ConsoleUI
 
             Console.WriteLine("Please enter your name: ");
             fullName = Console.ReadLine();
-            ValidateThatTheInputIsNotEmpty(fullName);
+            InputIsNotEmpty(fullName);
             Console.WriteLine("Please enter your phone number: ");
             phoneNumber = Console.ReadLine();
-            ValidateThatTheInputIsNotEmpty(phoneNumber);
+            InputIsNotEmpty(phoneNumber);
             Console.WriteLine("Please enter the model of the vehicle: ");
             modelName = Console.ReadLine();
-            ValidateThatTheInputIsNotEmpty(modelName);
+            InputIsNotEmpty(modelName);
             Console.WriteLine("Please enter the manufacture of the wheels: ");
             ValidateThatTheInputIsNotEmpty(energySourceLeft); /// added need to check
             Console.WriteLine("Please enter the manufacture of the wheels: ");
             manufactureOfTheWheels = Console.ReadLine();
-            ValidateThatTheInputIsNotEmpty(manufactureOfTheWheels);
+            InputIsNotEmpty(manufactureOfTheWheels);
             m_Garage.AddGeneralInfo(i_VehicleInGarage, fullName, phoneNumber, modelName);
             i_VehicleInGarage.CurrentVehicle.InsertManufactureName(manufactureOfTheWheels);
         }
@@ -143,6 +143,14 @@ namespace Ex03.ConsoleUI
             float.TryParse(Console.ReadLine(), out minutesAmount);
             //What happens if minutes amount is invalid
             Garage.ChargeCar(licenseNumber , minutesAmount);
+        }
+
+        public void InputIsNotEmpty(string i_Value)
+        {
+            if(i_Value == String.Empty)
+            {
+                throw new ArgumentException("didnt enter value");
+            }
         }
     }
 }

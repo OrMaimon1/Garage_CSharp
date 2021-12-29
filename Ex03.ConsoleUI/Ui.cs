@@ -76,11 +76,10 @@ namespace Ex03.ConsoleUI
                     UiManager.AddVehicle();
                     break;
                 case eActionSelector.ChangeVehicleState:
-                    UiManager.
+                    UiManager.ChargeVehicle();
                     break;
                 case eActionSelector.InflateWheels:
-                    UiManager.
-
+                    
                     break;
                 case eActionSelector.ShowLicensePlate:
                     break;
@@ -90,6 +89,11 @@ namespace Ex03.ConsoleUI
                     break;
                 case eActionSelector.ShowVehicle:
                     break;
+            }
+
+            if(expr)
+            {
+                
             }
         }
 
