@@ -54,7 +54,7 @@ namespace Ex03.ConsoleUI
             string fullName = string.Empty;
             string phoneNumber = string.Empty;
             string modelName = string.Empty;
-            float energySourceLeft = 0;
+            float energySourceLeft = i_VehicleInGarage.Vehicle.Engine.EnergySourceLeft / i_VehicleInGarage.Vehicle.Engine.MaxEnergySource;
             string manufactureOfTheWheels = string.Empty;
 
             Console.WriteLine("Please enter your name: ");
@@ -75,7 +75,7 @@ namespace Ex03.ConsoleUI
             i_VehicleInGarage.CurrentVehicle.InsertManufactureName(manufactureOfTheWheels);
         }
 
-
+        
         public void UpdateVehicleState()
         {
             Console.WriteLine("Please choose the license number of the vehicle you wish to update");

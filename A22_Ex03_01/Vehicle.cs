@@ -10,7 +10,7 @@ namespace A22_Ex03_01
     {
         private string m_VehicleModel;
         private string m_LicenseNumber;
-        private float m_EnergySourceLeft;
+        private float m_PercentEnergySourceLeft;
         private readonly List<Wheel> r_Wheels; 
         private Engine m_Engine; 
 
@@ -62,15 +62,15 @@ namespace A22_Ex03_01
             set
             { m_LicenseNumber = value; }
         }
-        public float EnergySourceLeft
+        public float PercentEnergySourceLeft
         {
             get
             {
-                return m_EnergySourceLeft;
+                return m_PercentEnergySourceLeft;
             }
             set
             {
-                m_EnergySourceLeft = value;
+                m_PercentEnergySourceLeft = value;
             }
         }
         public Engine Engine
