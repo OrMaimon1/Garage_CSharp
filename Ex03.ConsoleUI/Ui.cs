@@ -79,6 +79,8 @@ namespace Ex03.ConsoleUI
                     UiManager.
                     break;
                 case eActionSelector.InflateWheels:
+                    UiManager.
+
                     break;
                 case eActionSelector.ShowLicensePlate:
                     break;
