@@ -38,22 +38,18 @@ namespace Ex03.ConsoleUI
                 string vehicleType = Console.ReadLine();
                 //Enum.TryParse(Console.ReadLine(), out vehicleType);
                 Vehicle vehicle = VehicleFactory.CreateVehicle(vehicleType, licenseNumber);
-
+                VehicleInGarage vehicleInGarage = new VehicleInGarage();
+                vehicleInGarage.Vehicle = vehicle;
+                EnteringGeneralInfo(vehicleInGarage);
                 Hashtable UniqueInfoOfVehicle = vehicle.FetchUniqueInfo();
-
                 foreach(KeyValuePair<string , string> infoToFill in UniqueInfoOfVehicle)
                 {
+                    Console.WriteLine(infoToFill.Key);
                     vehicle.UpdateUniqueInfo(infoToFill.Key , Console.ReadLine());
                 }
-
-
-
             }
         }
-
-
-
-        public void EnteringGeneralInfo(Garage.VehicleInGarage i_VehicleInGarage)
+        public void EnteringGeneralInfo(VehicleInGarage i_VehicleInGarage)
         {
             string fullName = string.Empty;
             string phoneNumber = string.Empty;
@@ -79,5 +75,26 @@ namespace Ex03.ConsoleUI
             i_VehicleInGarage.CurrentVehicle.InsertManufactureName(manufactureOfTheWheels);
         }
 
+
+        public void UpdateVehicleState()
+        {
+            Console.WriteLine("Please choose the license number of the vehicle you wish to update");
+            //Need to validate license input
+            string licenseNumber = Console.ReadLine();
+            Console.WriteLine("Please choose the new state of the vehicle: ");
+            //Need to creaate a menu for vehicle states
+            string userChoice = Console.ReadLine();
+            eVehicleState vehicleState;
+            Enum.TryParse(userChoice, out vehicleState);
+            Garage.UpdateVehicleState(licenseNumber , vehicleState);
+        }
+
+        public void ViewVehicleLicense()
+        {
+            eVehicleState vehicleState;
+            Console.WriteLine("Please choose which Licenses you wish to view");
+            //Need to create a menu for Vehicle state
+            Enum.TryParse(Console.ReadLine(), out vehicleState);
+        }
     }
 }
