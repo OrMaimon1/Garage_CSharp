@@ -56,11 +56,11 @@ namespace A22_Ex03_01
             }
             else
             {
-                foreach (KeyValuePair<string, VehicleInGarage> vehicleInGarage in AllVehiclesInGarage)
+                foreach (VehicleInGarage vehicleInGarage in AllVehiclesInGarage.Values)
                 {
-                    if(vehicleInGarage.Value.VehicleState == i_VehicleState)
+                    if(vehicleInGarage.VehicleState == i_VehicleState)
                     {
-                        listOfLicenses.Add(vehicleInGarage.Value.Vehicle.LicenseNumber);
+                        listOfLicenses.Add(vehicleInGarage.Vehicle.LicenseNumber);
                     }
                 }
             }
@@ -95,26 +95,22 @@ namespace A22_Ex03_01
             AllVehiclesInGarage.TryGetValue(i_License, out vehicleInGarage);
             (vehicleInGarage.Vehicle.Engine as FuelEngine).ReFuel(i_AmountToFuel, i_FuelType);
         }
-
         public void ChargeCar(string i_License, float i_MinutesToCharge)
         {
             VehicleInGarage vehicleInGarage;
             AllVehiclesInGarage.TryGetValue(i_License, out vehicleInGarage);
             (vehicleInGarage.Vehicle.Engine as ElectricEngine).ReCharge(i_MinutesToCharge);
         }
-
         public VehicleInGarage GetVehicle(string i_License)
         {
             VehicleInGarage vehicleInGarage;
             AllVehiclesInGarage.TryGetValue(i_License, out vehicleInGarage);
             return vehicleInGarage;
         }
-
         public bool VehicleExists(string i_LicenseNumber)
         {
             return AllVehiclesInGarage.ContainsKey(i_LicenseNumber);
         }
-
         public StringBuilder GeneralMenu(Enum i_TypeOfEnum) //added
         {
             int index = 0;
@@ -135,7 +131,6 @@ namespace A22_Ex03_01
             }
             return tempStringBuilder;
         }
-
         public void CheckingLicenseInput(string i_UsersLicenseNumber)
         {
             int numberForParse;
@@ -148,7 +143,6 @@ namespace A22_Ex03_01
                 throw new ValueOutOfRangeException(9999999, 0);
             }
         }
-
         public void EnumInputValidator(string i_userInput, Enum i_Enum)
         {
             int statesCount;
@@ -160,5 +154,6 @@ namespace A22_Ex03_01
                 throw new ValueOutOfRangeException(statesCount, 1);
             }
         }
+
     }
 }

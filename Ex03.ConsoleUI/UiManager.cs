@@ -35,19 +35,20 @@ namespace Ex03.ConsoleUI
             else
             {
                 Console.WriteLine("Please choose vehicle type: ");
-                //Need  To Create menu of types to choose from
+                eVehicleType eVehicleType = eVehicleType.None;
+                Console.Write(Garage.GeneralMenu(eVehicleType));
                 string vehicleType = Console.ReadLine();
-                //Enum.TryParse(Console.ReadLine(), out vehicleType);
                 Vehicle vehicle = VehicleFactory.CreateVehicle(vehicleType, licenseNumber);
                 VehicleInGarage vehicleInGarage = new VehicleInGarage();
                 vehicleInGarage.Vehicle = vehicle;
                 EnteringGeneralInfo(vehicleInGarage);
                 Hashtable UniqueInfoOfVehicle = vehicle.FetchUniqueInfo();
-                foreach(KeyValuePair<string , string> infoToFill in UniqueInfoOfVehicle)
+                foreach(string infoToFill in UniqueInfoOfVehicle.Keys)
                 {
-                    Console.WriteLine(infoToFill.Key);
-                    vehicle.UpdateUniqueInfo(infoToFill.Key , Console.ReadLine());
+                    Console.WriteLine(infoToFill);
+                    vehicle.UpdateUniqueInfo(infoToFill , Console.ReadLine());
                 }
+                Garage.AddNewVehicle(licenseNumber , vehicleInGarage);
             }
         }
         public void EnteringGeneralInfo(VehicleInGarage i_VehicleInGarage)
@@ -85,18 +86,20 @@ namespace Ex03.ConsoleUI
         {
             string licenseNumber = AskUserForLicenseNumber();
             Console.WriteLine("Please choose the new state of the vehicle: ");
+            eVehicleState vehicleState = eVehicleState.None;
+            Garage.GeneralMenu(vehicleState);
             //Need to creaate a menu for vehicle states
             string userChoice = Console.ReadLine();
-            eVehicleState vehicleState;
             Enum.TryParse(userChoice, out vehicleState);
             Garage.UpdateVehicleState(licenseNumber , vehicleState);
         }
 
         public void ViewVehicleLicense()
         {
-            eVehicleState vehicleState;
-            Console.WriteLine("Please choose which Licenses you wish to view");
+            eVehicleState vehicleState = eVehicleState.None;
+            Console.WriteLine("Please choose the vehicle state of the Licenses you wish to view ");
             //Need to create a menu for Vehicle state
+            Console.Write(Garage.GeneralMenu(vehicleState));
             Enum.TryParse(Console.ReadLine(), out vehicleState);
             List<string> licensesToView = Garage.ShowListOfLicenses(vehicleState);
             foreach(string license in licensesToView)
@@ -108,7 +111,10 @@ namespace Ex03.ConsoleUI
         public void InflateWheelsToMax()
         {
             string licenseNumber = AskUserForLicenseNumber();
-            //Need to validate license number
+            if(!Garage.VehicleExists(licenseNumber))
+            {
+                throw new Exception("Could Not find vehicle");
+            }
             Garage.InflateWheelsToMaximumPressure(licenseNumber);
         }
 
@@ -117,8 +123,8 @@ namespace Ex03.ConsoleUI
             string licenseNumber = AskUserForLicenseNumber();
             //Need to validte license number input 
             Console.WriteLine("Please choose type of fuel you wish to use: ");
-            //Need to create FuelType menu
-            eFuelType fuelType;
+            eFuelType fuelType = eFuelType.None;
+            Garage.GeneralMenu(fuelType);
             Enum.TryParse(Console.ReadLine(), out fuelType);
             Console.WriteLine("Please choose the amount you wish to fuel: ");
             float fuelAmount;

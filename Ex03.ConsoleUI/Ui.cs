@@ -8,7 +8,7 @@ namespace Ex03.ConsoleUI
 {
     public class Ui
     {
-        private UiManager m_UiManeger;
+        private UiManager m_UiManeger = new UiManager();
 
          private enum eActionSelector
         {
@@ -76,7 +76,7 @@ namespace Ex03.ConsoleUI
                     UiManager.AddVehicle();
                     break;
                 case eActionSelector.ChangeVehicleState:
-                    UiManager.ChargeVehicle();
+                    UiManager.UpdateVehicleState();
                     break;
                 case eActionSelector.InflateWheels:
                     UiManager.InflateWheelsToMax();
