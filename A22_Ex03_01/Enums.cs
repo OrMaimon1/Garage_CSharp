@@ -8,6 +8,7 @@ namespace A22_Ex03_01
     //temp stat need to check if every enum need a class
     public enum eVehicleState
     {
+        None,
         Fixing,
         Fixed,
         Payed,

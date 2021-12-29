@@ -8,58 +8,80 @@ namespace A22_Ex03_01
 {
     public class Garage
     {
-        private Dictionary<string, Vehicle> m_VehiclesInGarage;
-        private InfoOnCar m_infoOnCar;
+        private Dictionary<string, VehicleInGarage> m_AllAllVehiclesInGarage;
+        private VehicleInGarage m_InfoOnCar;
         public Garage()
         {
-            m_VehiclesInGarage = new Dictionary<string, Vehicle>();
+            m_AllAllVehiclesInGarage = new Dictionary<string, VehicleInGarage>();
         }
 
-        public Dictionary<string, Vehicle> VehiclesInGarage
+        public Dictionary<string, VehicleInGarage> AllVehiclesInGarage
         {
             get
             {
-                return m_VehiclesInGarage;
+                return m_AllAllVehiclesInGarage;
             }
         }
 
+        public VehicleInGarage InfoOnCar
+        {
+            get
+            {
+                return m_InfoOnCar;
+            }
+        }
+        
+
         public void AddExistingVehicle(string i_license)
         {
-            Vehicle vehicle;
-            VehiclesInGarage.TryGetValue(i_license, out vehicle);
-            vehicle.InfoOnCar.VehicleState = eVehicleState.Fixing;
+            VehicleInGarage vehicleInGarage;
+            AllVehiclesInGarage.TryGetValue(i_license, out vehicleInGarage);
+            vehicleInGarage.VehicleState = eVehicleState.Fixing;
         }
 
-        public void AddNewVehicle(string i_license, Vehicle i_Vehicle)
+        public void AddNewVehicle(string i_license, VehicleInGarage i_Vehicle)
         {
-            VehiclesInGarage.Add(i_license, i_Vehicle);
+            AllVehiclesInGarage.Add(i_license, i_Vehicle);
         }
 
-        public List<string> ShowListOfLicenses()
+        public List<string> ShowListOfLicenses(eVehicleState i_VehicleState)
         {
             List<string> listOfLicenses = new List<string>();
-            foreach (KeyValuePair<string, Vehicle> vehicle in VehiclesInGarage)
+            if(i_VehicleState == eVehicleState.None)
             {
-                listOfLicenses.Add(vehicle.Value.LicenseNumber);
+                foreach(KeyValuePair<string, VehicleInGarage> vehicleInGarage in AllVehiclesInGarage)
+                {
+                    listOfLicenses.Add(vehicleInGarage.Value.Vehicle.LicenseNumber);
+                }
+            }
+            else
+            {
+                foreach (KeyValuePair<string, VehicleInGarage> vehicleInGarage in AllVehiclesInGarage)
+                {
+                    if(vehicleInGarage.Value.VehicleState == i_VehicleState)
+                    {
+                        listOfLicenses.Add(vehicleInGarage.Value.Vehicle.LicenseNumber);
+                    }
+                }
             }
 
             return listOfLicenses;
         }
 
-        public void ChangeVehicleState(string i_License, eVehicleState i_NewState)
+        public void UpdateVehicleState(string i_License, eVehicleState i_NewState)
         {
-            Vehicle vehicle;
-            VehiclesInGarage.TryGetValue(i_License, out vehicle);
-            vehicle.InfoOnCar.VehicleState = i_NewState;
+            VehicleInGarage vehicle;
+            AllVehiclesInGarage.TryGetValue(i_License, out vehicle);
+            vehicle.VehicleState = i_NewState;
         }
 
         public void InflateWheelsToMaximumPressure(string i_License)//in vehical need to check
         {
-            Vehicle vehicle;
+            VehicleInGarage vehicleInGarage;
             float currentPressure;
             float maxPressure;
-            VehiclesInGarage.TryGetValue(i_License, out vehicle);
-            foreach (Wheel wheel in vehicle.Wheels)
+            AllVehiclesInGarage.TryGetValue(i_License, out vehicleInGarage);
+            foreach (Wheel wheel in vehicleInGarage.Vehicle.Wheels)
             {
                 currentPressure = wheel.CurrentAirPressure;
                 maxPressure = wheel.MaxAirPressure;
@@ -69,28 +91,28 @@ namespace A22_Ex03_01
 
         public void FuelCar(string i_License, eFuelType i_FuelType, float i_AmountToFuel)
         {
-            Vehicle vehicle;
-            VehiclesInGarage.TryGetValue(i_License, out vehicle);
-            (vehicle.Engine as FuelEngine).ReFuel(i_AmountToFuel, i_FuelType);
+            VehicleInGarage vehicleInGarage;
+            AllVehiclesInGarage.TryGetValue(i_License, out vehicleInGarage);
+            (vehicleInGarage.Vehicle.Engine as FuelEngine).ReFuel(i_AmountToFuel, i_FuelType);
         }
 
         public void ChargeCar(string i_License, float i_MinutesToCharge)
         {
-            Vehicle vehicle;
-            VehiclesInGarage.TryGetValue(i_License, out vehicle);
-            (vehicle.Engine as ElectricEngine).ReCharge(i_MinutesToCharge);
+            VehicleInGarage vehicleInGarage;
+            AllVehiclesInGarage.TryGetValue(i_License, out vehicleInGarage);
+            (vehicleInGarage.Vehicle.Engine as ElectricEngine).ReCharge(i_MinutesToCharge);
         }
 
-        public Vehicle GetVehicle(string i_License)
+        public VehicleInGarage GetVehicle(string i_License)
         {
-            Vehicle vehicle;
-            VehiclesInGarage.TryGetValue(i_License, out vehicle);
-            return vehicle;
+            VehicleInGarage vehicleInGarage;
+            AllVehiclesInGarage.TryGetValue(i_License, out vehicleInGarage);
+            return vehicleInGarage;
         }
 
         public bool VehicleExists(string i_LicenseNumber)
         {
-            return VehiclesInGarage.ContainsKey(i_LicenseNumber);
+            return AllVehiclesInGarage.ContainsKey(i_LicenseNumber);
         }
 
         public StringBuilder GeneralMenu(Enum i_TypeOfEnum) //added
