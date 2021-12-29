@@ -7,7 +7,7 @@ namespace Ex03.ConsoleUI
 {
     public class Ui
     {
-        private UiManeger m_UiManeger;
+        private UiManager m_UiManeger;
 
          private enum eActionSelector
         {
@@ -21,9 +21,17 @@ namespace Ex03.ConsoleUI
             Exit
         }
 
+         private UiManager UiManager
+         {
+             get
+             {
+                 return m_UiManeger;
+             }
+         }
+
          public void Start()
          {
-             int userInput;
+             eActionSelector action;
              StringBuilder userMenusb = new StringBuilder();
              userMenusb.AppendLine("Enter the number of the action you want to preform: ");
              userMenusb.AppendLine("1.Enter your vehicle to the garage");
@@ -35,17 +43,33 @@ namespace Ex03.ConsoleUI
              userMenusb.AppendLine("7.show Vehicle details");
              userMenusb.AppendLine("8.Quit");
              Console.WriteLine(userMenusb);
-             int.TryParse(Console.ReadLine(), out userInput);
-             //need to check input with func
+             Enum.TryParse(Console.ReadLine(), out action);
+             PreformUserChoice(action);
+         }
 
-             switch(userInput)
+         private void PreformUserChoice(eActionSelector i_UserInput)
+         {
+             switch(i_UserInput)
              {
                 case eActionSelector.EnterYourVehicle:
+                    UiManager.AddVehicle();
+                    break;
+                case eActionSelector.ChangeVehicleState:
+                    break;
+                case eActionSelector.InflateWheels:
+                    break;
+                case eActionSelector.ShowLicensePlate:
+                    break;
+                case eActionSelector.ReFuelVehicle:
+                    break;
+                case eActionSelector.ReChargeVehicle:
+                    break;
+                case eActionSelector.ShowVehicle:
                     break;
              }
-             
-
          }
+
+
 
 
     }

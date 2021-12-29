@@ -23,31 +23,30 @@ namespace A22_Ex03_01
             }
         }
 
-        public void AddVehicle(string i_license, Vehicle i_Vehicle)
+        public void AddExistingVehicle(string i_license)
         {
-            if(VehiclesInGarage.ContainsKey(i_license))
-            {
-                VehiclesInGarage.TryGetValue(i_license, out i_Vehicle);
-                i_Vehicle.InfoOnCar.VehicleState = eVehicleState.Fixing;
-                //Turn the state of vehicle to "In Repair"
-            }
-            else
-            {
-                VehiclesInGarage.Add(i_license , i_Vehicle);
-            }
+            Vehicle vehicle;
+            VehiclesInGarage.TryGetValue(i_license, out vehicle);
+            vehicle.InfoOnCar.VehicleState = eVehicleState.Fixing;
+        }
+
+        public void AddNewVehicle(string i_license , Vehicle i_Vehicle)
+        {
+            VehiclesInGarage.Add(i_license, i_Vehicle);
         }
 
         public List<string> ShowListOfLicenses()
         {
             List<string> listOfLicenses = new List<string>();
-            foreach(KeyValuePair<string , Vehicle> vehicle in VehiclesInGarage)
+            foreach(KeyValuePair<string, Vehicle> vehicle in VehiclesInGarage)
             {
                 listOfLicenses.Add(vehicle.Value.LicenseNumber);
             }
+
             return listOfLicenses;
         }
 
-        public void ChangeVehicleState(string i_License , eVehicleState i_NewState)
+        public void ChangeVehicleState(string i_License, eVehicleState i_NewState)
         {
             Vehicle vehicle;
             VehiclesInGarage.TryGetValue(i_License, out vehicle);
@@ -67,12 +66,14 @@ namespace A22_Ex03_01
                 wheel.Inflate(maxPressure - currentPressure);
             }
         }
+
         public void FuelCar(string i_License, eFuelType i_FuelType, float i_AmountToFuel)
         {
             Vehicle vehicle;
             VehiclesInGarage.TryGetValue(i_License, out vehicle);
-            (vehicle.Engine as FuelEngine).ReFuel(i_AmountToFuel , i_FuelType);
+            (vehicle.Engine as FuelEngine).ReFuel(i_AmountToFuel, i_FuelType);
         }
+
         public void ChargeCar(string i_License, float i_MinutesToCharge)
         {
             Vehicle vehicle;
@@ -86,5 +87,11 @@ namespace A22_Ex03_01
             VehiclesInGarage.TryGetValue(i_License, out vehicle);
             return vehicle;
         }
+
+        public bool VehicleExists(string i_LicenseNumber)
+        {
+            return VehiclesInGarage.ContainsKey(i_LicenseNumber);
+        }
     }
+
 }

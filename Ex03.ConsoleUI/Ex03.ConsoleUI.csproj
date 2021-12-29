@@ -34,7 +34,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Ui.cs" />
-    <Compile Include="UiManeger.cs" />
+    <Compile Include="UiManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\A22_Ex03_01\A22_Ex03_01.csproj">
