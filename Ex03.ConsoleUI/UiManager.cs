@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,17 +34,23 @@ namespace Ex03.ConsoleUI
             else
             {
                 Console.WriteLine("Please choose vehicle type: ");
-                eVehicleType vehicleType;
-                Enum.TryParse(Console.ReadLine(), out vehicleType);
+                //Need  To Create menu of types to choose from
+                string vehicleType = Console.ReadLine();
+                //Enum.TryParse(Console.ReadLine(), out vehicleType);
+                Vehicle vehicle = VehicleFactory.CreateVehicle(vehicleType, licenseNumber);
 
-                FillGeneralInfo();
+                Hashtable UniqueInfoOfVehicle = vehicle.FetchUniqueInfo();
+
+                foreach(KeyValuePair<string , string> infoToFill in UniqueInfoOfVehicle)
+                {
+                    vehicle.UpdateUniqueInfo(infoToFill.Key , Console.ReadLine());
+                }
+
+
+
             }
         }
 
-        public void FillGeneralInfo()
-        {
-            string
-        }
 
 
         public void EnteringGeneralInfo(GarageManager.VehicleInGarage i_VehicleInGarage)

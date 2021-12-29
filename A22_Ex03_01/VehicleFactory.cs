@@ -23,7 +23,7 @@ namespace A22_Ex03_01
         private const float k_TruckMaxTankCapacity = 130f;
         private const byte k_NumberOfWheelsForTruck = 16;
         
-        public static Vehicle AddVehicle(string i_UserChoice, string i_LicenseNumber)
+        public static Vehicle CreateVehicle(string i_UserChoice, string i_LicenseNumber)
         {
             eVehicleType userChoiceForVehicleType;
             Vehicle newVehicle = null;

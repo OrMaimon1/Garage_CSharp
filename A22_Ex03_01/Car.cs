@@ -10,7 +10,8 @@ namespace A22_Ex03_01
     {
         private eColor m_Color;
         private eNumberOfDoors m_NumberOfDoors;
-
+        private const string k_ChooseCarColorMessage = "Please choose the color of the car";
+        private const string k_ChooseNumberOfDoorsMessage = "Please choose number Of doors";
         public Car(string i_LicenseNumber, int i_NumberOfWheels, float i_MaxAirPressureForWheels,Engine i_Engine)
             : base(i_LicenseNumber, i_NumberOfWheels)
         {
@@ -21,26 +22,13 @@ namespace A22_Ex03_01
 
         public sealed override Hashtable FetchUniqueInfo()
         {
-            Garage tempGarageManager = new Garage();
+            Garage GarageManager = new Garage();
             Hashtable extraInfoMenu = new Hashtable();
-            eColor noneCarColor = eColor.None;
-            eNumberOfDoors noneNumberOfDoors = eNumberOfDoors.None;
+            eColor noColor = eColor.None;
+            eNumberOfDoors noDoors = eNumberOfDoors.None;
 
-            extraInfoMenu.Add(k_CarColorMessage, tempGarageManager.GeneralMenu(noneCarColor).ToString());
-            extraInfoMenu.Add(k_NumberOfDoorsMessage, tempGarageManager.GeneralMenu(noneNumberOfDoors).ToString());
-
-            return extraInfoMenu;
-        }
-
-        public sealed override Hashtable FetchUniqueInfo()
-        {
-            Garage tempGarageManager = new Garage();
-            Hashtable extraInfoMenu = new Hashtable();
-            eColor noneCarColor = eColor.None;
-            eNumberOfDoors noneNumberOfDoors = eNumberOfDoors.None;
-
-            extraInfoMenu.Add(k_CarColorMessage, tempGarageManager.GeneralMenu(noneCarColor).ToString());
-            extraInfoMenu.Add(k_NumberOfDoorsMessage, tempGarageManager.GeneralMenu(noneNumberOfDoors).ToString());
+            extraInfoMenu.Add(k_ChooseCarColorMessage, GarageManager.GeneralMenu(noColor).ToString());
+            extraInfoMenu.Add(k_ChooseNumberOfDoorsMessage, GarageManager.GeneralMenu(noDoors).ToString());
 
             return extraInfoMenu;
         }
@@ -51,12 +39,12 @@ namespace A22_Ex03_01
 
             switch (i_KeyMessage)
             {
-                case k_CarColorMessage:
+                case k_ChooseCarColorMessage:
                     eColor noneCarColor = eColor.None;
                     tempGarageManager.ValidateUsersInputBasedOnTheRangeOfThisEnum(i_UserInput, noneCarColor);
                     m_Color = (eColor)Enum.Parse(typeof(eColor), i_UserInput);
                     break;
-                case k_NumberOfDoorsMessage:
+                case k_ChooseNumberOfDoorsMessage:
                     eNumberOfDoors noneNumberOfDoors = eNumberOfDoors.None;
                     tempGarageManager.ValidateUsersInputBasedOnTheRangeOfThisEnum(i_UserInput, noneNumberOfDoors);
                     m_NumberOfDoors = (eNumberOfDoors)Enum.Parse(typeof(eNumberOfDoors), i_UserInput);
