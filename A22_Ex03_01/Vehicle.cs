@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Collections;
 
@@ -11,20 +10,16 @@ namespace A22_Ex03_01
         private string m_VehicleModel;
         private string m_LicenseNumber;
         private float m_PercentEnergySourceLeft;
-        private readonly List<Wheel> r_Wheels = new List<Wheel>(); 
-        private Engine m_Engine; 
-
+        private readonly List<Wheel> r_Wheels; 
+        private Engine m_Engine;
         public Vehicle(string i_LicenseNumber, int i_NumberOfWheels)
         {
             m_LicenseNumber = i_LicenseNumber;
             r_Wheels = new List<Wheel>(i_NumberOfWheels);
         }
-
         public abstract Hashtable FetchUniqueInfo();
-        public abstract void UpdateUniqueInfo(string i_KeyMessage, string i_UserInput);
-
+        public abstract void UpdateInfo(string i_KeyMessage, string i_UserInput);
         public abstract StringBuilder ShowUniqueInfoMenuForChoice(string i_message);
-
         public void CreateTheWheels(float i_MaxAirPressureForWheels, int i_NumberOfWheels) // need to check
         {
             for (int i = 0; i < i_NumberOfWheels; i++)
@@ -39,10 +34,9 @@ namespace A22_Ex03_01
                 wheel.ManufacturerName = i_ManufactureOfTheWheels;
             }
         }
-
         public virtual string DetailsOfVehicle()
         {
-            string details = String.Format(@"Vehicle Type: {9}
+            string details = String.Format(@"
 License number: {0}
 Model Name: {1}
 Energy Source Precentage Left: {2}
@@ -101,6 +95,5 @@ Max Wheel Air Pressure: {8}" ,
 
             }
         }
-
     }
 }

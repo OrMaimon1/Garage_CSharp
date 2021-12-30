@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace A22_Ex03_01
 {
@@ -9,13 +7,11 @@ namespace A22_Ex03_01
     {
         private float m_MaxEnergySource;
         private float m_EnergySourceLeft;
-
         public Engine(float i_MaxEnergySource, float i_EnergySourceLeft)
         {
             m_MaxEnergySource = i_MaxEnergySource;
             m_EnergySourceLeft = i_EnergySourceLeft;
         }
-
         public float MaxEnergySource
         {
             get
@@ -27,7 +23,6 @@ namespace A22_Ex03_01
                 m_MaxEnergySource = value;
             }
         }
-
         public float EnergySourceLeft
         {
             get
@@ -39,7 +34,5 @@ namespace A22_Ex03_01
                 this.m_EnergySourceLeft = value;
             }
         }
-
-
     }
 }

@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
 
 namespace A22_Ex03_01
 {
-    //temp stat need to check if every enum need a class
     public enum eVehicleState
     {
         None,
         Fixing,
         Fixed,
         Payed,
-
     }
     public enum eLicenseType
     {
@@ -38,7 +33,6 @@ namespace A22_Ex03_01
         Octan95,
         Solar
     }
-
     public enum eVehicleType
     {
         None,
@@ -48,7 +42,6 @@ namespace A22_Ex03_01
         FuelCar,
         Truck
     }
-
     public enum eNumberOfDoors
     {
         None,

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace A22_Ex03_01
 {
@@ -10,7 +7,6 @@ namespace A22_Ex03_01
         private string m_ManufacturerName;
         private float m_CurrentAirPressure;
         private float m_MaxAirPressure;
-
         public Wheel(float i_MaxAirPressure)
         {
             m_ManufacturerName = string.Empty;
@@ -39,7 +35,6 @@ namespace A22_Ex03_01
                 m_ManufacturerName = value;
             }
         }
-
         public float CurrentAirPressure
         {
             get
@@ -52,7 +47,6 @@ namespace A22_Ex03_01
                 m_CurrentAirPressure = value;
             }
         }
-
         public float MaxAirPressure { 
             get
             {

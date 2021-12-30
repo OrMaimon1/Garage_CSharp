@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 
 namespace A22_Ex03_01
@@ -14,7 +12,6 @@ namespace A22_Ex03_01
         {
             m_AllAllVehiclesInGarage = new Dictionary<string, VehicleInGarage>();
         }
-
         public Dictionary<string, VehicleInGarage> AllVehiclesInGarage
         {
             get
@@ -22,7 +19,6 @@ namespace A22_Ex03_01
                 return m_AllAllVehiclesInGarage;
             }
         }
-
         public VehicleInGarage InfoOnCar
         {
             get
@@ -30,20 +26,16 @@ namespace A22_Ex03_01
                 return m_InfoOnCar;
             }
         }
-        
-
         public void AddExistingVehicle(string i_license)
         {
             VehicleInGarage vehicleInGarage;
             AllVehiclesInGarage.TryGetValue(i_license, out vehicleInGarage);
             vehicleInGarage.VehicleState = eVehicleState.Fixing;
         }
-
         public void AddNewVehicle(string i_license, VehicleInGarage i_Vehicle)
         {
             AllVehiclesInGarage.Add(i_license, i_Vehicle);
         }
-
         public List<string> ShowListOfLicenses(eVehicleState i_VehicleState)
         {
             List<string> listOfLicenses = new List<string>();
@@ -64,18 +56,15 @@ namespace A22_Ex03_01
                     }
                 }
             }
-
             return listOfLicenses;
         }
-
         public void UpdateVehicleState(string i_License, eVehicleState i_NewState)
         {
             VehicleInGarage vehicle;
             AllVehiclesInGarage.TryGetValue(i_License, out vehicle);
             vehicle.VehicleState = i_NewState;
         }
-
-        public void InflateWheelsToMaximumPressure(string i_License)//in vehical need to check
+        public void InflateWheelsToMaximumPressure(string i_License)
         {
             VehicleInGarage vehicleInGarage;
             float currentPressure;
@@ -88,17 +77,24 @@ namespace A22_Ex03_01
                 wheel.Inflate(maxPressure - currentPressure);
             }
         }
-
-        public void FuelCar(string i_License, eFuelType i_FuelType, float i_AmountToFuel)
+        public void FuelCar(string i_License, eFuelType i_FuelType, float i_AmountToFuel) //need to check if the car is fuel
         {
             VehicleInGarage vehicleInGarage;
             AllVehiclesInGarage.TryGetValue(i_License, out vehicleInGarage);
+            if(vehicleInGarage.Vehicle.Engine != (vehicleInGarage.Vehicle.Engine as FuelEngine))
+            {
+                throw new ArgumentException("your vehicle is electric try to charge");
+            }
             (vehicleInGarage.Vehicle.Engine as FuelEngine).ReFuel(i_AmountToFuel, i_FuelType);
         }
-        public void ChargeCar(string i_License, float i_MinutesToCharge)
+        public void ChargeCar(string i_License, float i_MinutesToCharge) //need to check if the car is electric
         {
             VehicleInGarage vehicleInGarage;
             AllVehiclesInGarage.TryGetValue(i_License, out vehicleInGarage);
+            if (vehicleInGarage.Vehicle.Engine != (vehicleInGarage.Vehicle.Engine as ElectricEngine))
+            {
+                throw new ArgumentException("your vehicle is electric try to charge");
+            }
             (vehicleInGarage.Vehicle.Engine as ElectricEngine).ReCharge(i_MinutesToCharge);
         }
         public VehicleInGarage GetVehicle(string i_License)
@@ -111,10 +107,9 @@ namespace A22_Ex03_01
         {
             return AllVehiclesInGarage.ContainsKey(i_LicenseNumber);
         }
-        public StringBuilder GeneralMenu(Enum i_TypeOfEnum) //added
+        public StringBuilder GeneralMenu(Enum i_TypeOfEnum) 
         {
             int index = 0;
-
             StringBuilder tempStringBuilder = new StringBuilder();
             Type typeOfEnum = i_TypeOfEnum.GetType();
             tempStringBuilder.AppendLine();
@@ -126,7 +121,6 @@ namespace A22_Ex03_01
                     tempStringBuilder.Append(state);
                     tempStringBuilder.AppendLine();
                 }
-
                 index++;
             }
             return tempStringBuilder;
@@ -154,6 +148,5 @@ namespace A22_Ex03_01
                 throw new ValueOutOfRangeException(statesCount, 1);
             }
         }
-
     }
 }

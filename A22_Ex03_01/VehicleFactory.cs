@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
+
 
 namespace A22_Ex03_01
 {
     public class VehicleFactory
     {
-        /// fuel car const info
+        /// car const info
         private const float k_wheelPressureForCars = 29;
         private const float k_FuelCarMaxTankCapacity = 48f;
         private const byte k_NumberOfWheelsForCars = 4;
         private const float k_ElectricalCarMaxBatteryLife = 2.6f;
-        /// fuel motorcycle const info
+        /// motorcycle const info
         private const float k_wheelPressureForMotorycle = 30;
         private const float k_FuelMotorcycleMaxTankCapacity = 5.8f;
         private const byte k_NumberOfWheelsForMotorcycle = 2;
@@ -22,16 +19,13 @@ namespace A22_Ex03_01
         private const float k_wheelPressureForTrucks = 25;
         private const float k_TruckMaxTankCapacity = 130f;
         private const byte k_NumberOfWheelsForTruck = 16;
-        
         public static Vehicle CreateVehicle(string i_UserChoice, string i_LicenseNumber)
         {
             eVehicleType userChoiceForVehicleType;
             Vehicle newVehicle = null;
-
             userChoiceForVehicleType = (eVehicleType)Enum.Parse(typeof(eVehicleType), i_UserChoice);
             switch (userChoiceForVehicleType)
             {
-
                 case eVehicleType.FuelCar:
                     Engine carFuelEngine = new FuelEngine(k_FuelCarMaxTankCapacity,0f, eFuelType.Octan95);
                     newVehicle = new Car(i_LicenseNumber, k_NumberOfWheelsForCars,k_wheelPressureForCars,carFuelEngine);
@@ -55,7 +49,5 @@ namespace A22_Ex03_01
             }
             return newVehicle;
         }
-
-
     }
 }

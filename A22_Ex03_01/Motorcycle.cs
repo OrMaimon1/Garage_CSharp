@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Collections;
 
@@ -8,20 +6,16 @@ namespace A22_Ex03_01
 {
     public class Motorcycle : Vehicle
     {
-
         private int m_EngineVolume;
         private eLicenseType m_LicenseType;
         private const string k_ChooseLicenseMessage = "Choose the license type of the motorcycle:";
-        private const string k_EnterEngineVolumeMessage = "Please enter your engine volume a positive number between 0 - 3000: ";
-
+        private const string k_EnterEngineVolumeMessage = "Please enter your engine volume a positive number ";
         public Motorcycle(string i_LicenseNumber, int i_NumberOfWheels, float i_MaxAirPressureForWheels,Engine i_Engine)
             : base( i_LicenseNumber,i_NumberOfWheels)
         {
             CreateTheWheels(i_MaxAirPressureForWheels, i_NumberOfWheels);
             Engine = i_Engine;
-            //Engine = new FuelEngine(i_MaxTankCapacity, 0, i_fuelType);
         }
-
         public sealed override Hashtable FetchUniqueInfo()
         {
             Garage tempGarageManager = new Garage();
@@ -30,11 +24,9 @@ namespace A22_Ex03_01
 
             extraInfoMenu.Add(k_ChooseLicenseMessage, tempGarageManager.GeneralMenu(noneLicenseType).ToString());
             extraInfoMenu.Add(k_EnterEngineVolumeMessage, null);
-
             return extraInfoMenu;
         }
-
-        public sealed override void UpdateUniqueInfo(string i_KeyMessage, string i_UserInput)
+        public sealed override void UpdateInfo(string i_KeyMessage, string i_UserInput)
         {
             Garage garage = new Garage();
             switch (i_KeyMessage)
@@ -46,12 +38,11 @@ namespace A22_Ex03_01
                     ShowUniqueInfoMenuForChoice(k_ChooseLicenseMessage);
                     break;
                 case k_EnterEngineVolumeMessage:
-                    validatingEngineVolumeInput(i_UserInput);
+                    ValidatingEngineVolumeInput(i_UserInput);
                     m_EngineVolume = int.Parse(i_UserInput);
                     break;
             }
         }
-
         public override StringBuilder ShowUniqueInfoMenuForChoice(string i_Message)
         {
             StringBuilder menu = new StringBuilder();
@@ -63,7 +54,7 @@ namespace A22_Ex03_01
             }
             return menu;
         }
-        private static void validatingEngineVolumeInput(string i_UserInput)
+        public void ValidatingEngineVolumeInput(string i_UserInput)
         {
             int numberForParse;
 
@@ -71,13 +62,11 @@ namespace A22_Ex03_01
             {
                 throw new FormatException("Wrong input");
             }
-
             if (numberForParse < 0)
             {
                 throw new ValueOutOfRangeException(3000, 0);
             }
         }
-
         public int EngineVolume {
             get
             { 
@@ -88,7 +77,6 @@ namespace A22_Ex03_01
                 m_EngineVolume = value;
             }
         }
-
         public eLicenseType LicenseType {
             get
             { 
@@ -99,12 +87,12 @@ namespace A22_Ex03_01
                 m_LicenseType = value;
             }
         }
-
         public override string DetailsOfVehicle()
         {
             string details = base.DetailsOfVehicle();
-            details += String.Format(@"Engine Volume: {0}
-License Type: {1}" ,EngineVolume , LicenseType );
+            details += String.Format(@"
+Engine Volume: {0}
+License Type: {1}" + Environment.NewLine, EngineVolume , LicenseType );
             return details;
         }
     }

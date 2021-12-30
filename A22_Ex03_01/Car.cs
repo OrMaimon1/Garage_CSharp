@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.Linq.Expressions;
 using System.Text;
 
 namespace A22_Ex03_01
@@ -17,26 +15,20 @@ namespace A22_Ex03_01
         {
             CreateTheWheels(i_MaxAirPressureForWheels, i_NumberOfWheels);
             Engine = i_Engine;
-            //Engine = new FuelEngine(i_MaxTankCapacity, 0, i_fuelType);
         }
-
         public sealed override Hashtable FetchUniqueInfo()
         {
             Garage GarageManager = new Garage();
             Hashtable extraInfoMenu = new Hashtable();
             eColor noColor = eColor.None;
             eNumberOfDoors noDoors = eNumberOfDoors.None;
-
             extraInfoMenu.Add(k_ChooseCarColorMessage, GarageManager.GeneralMenu(noColor).ToString());
             extraInfoMenu.Add(k_ChooseNumberOfDoorsMessage, GarageManager.GeneralMenu(noDoors).ToString());
-
             return extraInfoMenu;
         }
-
-        public sealed override void UpdateUniqueInfo(string i_KeyMessage, string i_UserInput)
+        public sealed override void UpdateInfo(string i_KeyMessage, string i_UserInput)
         {
             Garage garage = new Garage();
-
             switch (i_KeyMessage)
             {
                 case k_ChooseCarColorMessage:
@@ -51,7 +43,6 @@ namespace A22_Ex03_01
                     break;
             }
         }
-
         public override StringBuilder ShowUniqueInfoMenuForChoice(string i_message)
         {
             StringBuilder menu = new StringBuilder();
@@ -64,10 +55,8 @@ namespace A22_Ex03_01
             {
                 menu = garage.GeneralMenu(eNumberOfDoors.None);
             }
-
             return menu;
         }
-
         public eColor Color
         {
             get
@@ -79,7 +68,6 @@ namespace A22_Ex03_01
                 m_Color = value;
             }
         }
-
         public eNumberOfDoors NumberOfDoors
         {
             get
@@ -94,13 +82,12 @@ namespace A22_Ex03_01
             }
 
         }
-
         public override string DetailsOfVehicle()
         {
             string details = base.DetailsOfVehicle();
-            details += String.Format(@"Car Color: {0}
-Doors Number: {1}
-" , Color , NumberOfDoors);
+            details += String.Format(@"
+Car Color: {0}
+Doors Number: {1}" + Environment.NewLine, Color , NumberOfDoors);
             return details;
         }
     }

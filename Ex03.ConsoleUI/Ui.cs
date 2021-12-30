@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using A22_Ex03_01;
@@ -9,8 +8,7 @@ namespace Ex03.ConsoleUI
     public class Ui
     {
         private UiManager m_UiManeger = new UiManager();
-
-         private enum eActionSelector
+        private enum eActionSelector
         {
             EnterYourVehicle = 1,
             ShowLicensePlate,
@@ -21,15 +19,13 @@ namespace Ex03.ConsoleUI
             ShowVehicle,
             Exit
         }
-
-         private UiManager UiManager
+        private UiManager UiManager
          {
              get
              {
                  return m_UiManeger;
              }
          }
-
         public void Start()
         {
             bool resume = true;
@@ -37,6 +33,7 @@ namespace Ex03.ConsoleUI
             int checkInput;
             string userPickedNumber;
             StringBuilder userMenusb = new StringBuilder();
+            userMenusb.AppendLine();
             userMenusb.AppendLine("Enter the number of the action you want to preform: ");
             userMenusb.AppendLine("1.Enter your vehicle to the garage");
             userMenusb.AppendLine("2.View LicensePlate of the vehicle in the garage");
@@ -51,23 +48,21 @@ namespace Ex03.ConsoleUI
                 Console.WriteLine(userMenusb);
                 userPickedNumber = Console.ReadLine();
                 Enum.TryParse(userPickedNumber, out action);
-                if (!userPickedNumber.All(char.IsDigit))
-                {
-                    throw new FormatException("invalid input");
-                }
                 int.TryParse(userPickedNumber, out checkInput);
-                if (checkInput < 0 || 8 < checkInput)
+                if (!userPickedNumber.All(char.IsDigit) || checkInput < 0 || 8 < checkInput)
                 {
-                    throw new ValueOutOfRangeException(0,8);
+                    Console.WriteLine("please enter a number between 1-8 (include 1 and 8)"+Environment.NewLine);
                 }
-                if(checkInput == 8)
+                else
                 {
-                    resume = false;
+                    if (checkInput == 8)
+                    {
+                        resume = false;
+                    }
+                    PreformUserChoice(action);
                 }
-                PreformUserChoice(action);
             }
         }
-
         private void PreformUserChoice(eActionSelector i_UserInput)
         {
             switch (i_UserInput)
@@ -93,15 +88,10 @@ namespace Ex03.ConsoleUI
                 case eActionSelector.ShowVehicle:
                     UiManager.GetVehicleDetails();
                     break;
-                default:
-                    throw new Exception("Please Choose One Of The Options: ");
+                case eActionSelector.Exit:
+                    Environment.Exit(0);
+                    break;
             }
-
-
         }
-
-
-
-
     }
 }

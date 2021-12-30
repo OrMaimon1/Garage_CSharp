@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace A22_Ex03_01
 {
@@ -9,11 +6,9 @@ namespace A22_Ex03_01
     {
         private float m_MaxValue;
         private float m_MinValue;
-
         public  ValueOutOfRangeException(float i_MaxValue, float i_MinValue)
-           : base(string.Format(" out of range of {0} - {1} ", i_MinValue, i_MaxValue))
+           : base(string.Format(" out of range of {0} - {1} ", i_MaxValue, i_MinValue))
         {
-            
         }
         public ValueOutOfRangeException(float i_Value)
             : base(string.Format("out of range {0} - {1} ", 0, i_Value))

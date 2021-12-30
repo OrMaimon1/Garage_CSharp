@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace A22_Ex03_01
 {
     public class FuelEngine : Engine
     {
         private eFuelType m_FuelType;
-
         public FuelEngine(float i_MaxEnergySource, float i_EnergySourceLeft, eFuelType i_FuelType)
             :base(i_MaxEnergySource, i_EnergySourceLeft)
         {
@@ -26,8 +22,6 @@ namespace A22_Ex03_01
                 m_FuelType = value;
             }
         }
-
-
         public void ReFuel(float i_AmountToFuel, eFuelType i_FuelType)
         {
             if(FuelType == i_FuelType)
