@@ -77,8 +77,7 @@ namespace A22_Ex03_01
                 wheel.Inflate(maxPressure - currentPressure);
             }
         }
-        public void FuelCar(string i_License, eFuelType i_FuelType, float i_AmountToFuel) //need to check if the car is fuel
-        {
+        public void FuelCar(string i_License, eFuelType i_FuelType, float i_AmountToFuel)         {
             VehicleInGarage vehicleInGarage;
             AllVehiclesInGarage.TryGetValue(i_License, out vehicleInGarage);
             if(vehicleInGarage.Vehicle.Engine != (vehicleInGarage.Vehicle.Engine as FuelEngine))
@@ -87,7 +86,7 @@ namespace A22_Ex03_01
             }
             (vehicleInGarage.Vehicle.Engine as FuelEngine).ReFuel(i_AmountToFuel, i_FuelType);
         }
-        public void ChargeCar(string i_License, float i_MinutesToCharge) //need to check if the car is electric
+        public void ChargeCar(string i_License, float i_MinutesToCharge) 
         {
             VehicleInGarage vehicleInGarage;
             AllVehiclesInGarage.TryGetValue(i_License, out vehicleInGarage);
