@@ -139,10 +139,9 @@ namespace A22_Ex03_01
         }
         public void EnumInputValidator(string i_userInput, Enum i_Enum)
         {
-            int statesCount;
             int userInput;
             int.TryParse(i_userInput, out userInput);
-            statesCount = (int)(Enum.GetNames(i_Enum.GetType()).Length - 1);
+            int statesCount = (int)(Enum.GetNames(i_Enum.GetType()).Length - 1);
             if(userInput < 1 || userInput > statesCount)
             {
                 throw new ValueOutOfRangeException(statesCount, 1);
