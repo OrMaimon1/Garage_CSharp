@@ -40,11 +40,6 @@ namespace A22_Ex03_01
                     break;
             }
         }
-
-        public override StringBuilder ShowUniqueInfoMenuForChoice(string i_message)
-        {
-            return new StringBuilder(); // Maybe Need To Create a different menu
-        }
         public static void HasCargoValidation(string i_UserChoice)
         {
             if (i_UserChoice != "Yes" && i_UserChoice != "No")
